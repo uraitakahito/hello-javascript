@@ -13,7 +13,7 @@ app.locals.data = {
 };
 
 app.get('/', (req, res) => {
-  // レンダリングを行う
+  // Perform rendering
   res.render("index.ejs", app.locals.data);
 });
 
