@@ -7,6 +7,42 @@
       "name": "Debug express server",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/index.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Mocha All",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+          "--timeout",
+          "999999",
+          "--colors",
+          "${workspaceFolder}/test"
+      ],
+      // what kind of console to use, for example, internalConsole, integratedTerminal, or externalTerminal
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": [
+          "<node_internals>/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Mocha Current File",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+          "--timeout",
+          "999999",
+          "--colors",
+          "${file}"
+      ],
+      // what kind of console to use, for example, internalConsole, integratedTerminal, or externalTerminal
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": [
+          "<node_internals>/**/*.js"
+      ]
     }
   ]
 }
