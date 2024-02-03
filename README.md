@@ -2,5 +2,5 @@ Type:
 
 ```console
 % npm test
-% npm run start
+% node examples/express.js
 ```
