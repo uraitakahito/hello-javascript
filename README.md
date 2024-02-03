@@ -1,7 +1,8 @@
 Type:
 
 ```console
-% npm test
+% npx mocha
+% npx eslint .
 % cd examples/express
 % node examples/express/app.js
 ```

@@ -2,11 +2,15 @@
   "name": "hello-javascript",
   "version": "1.0.0",
   "scripts": {
+    "lint": "npx eslint .",
     "test": "npx mocha"
   },
   "dependencies": {
     "ejs": "*",
-    "express": "*",
+    "express": "*"
+  },
+  "devDependencies": {
+    "eslint": "*",
     "mocha": "*"
   }
 }
