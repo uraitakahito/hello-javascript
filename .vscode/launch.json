@@ -4,9 +4,10 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug express server",
+      "name": "express",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/index.js"
+      "program": "${workspaceFolder}/examples/express/app.js",
+      "cwd": "${workspaceFolder}/examples/express",
     },
     {
       "type": "node",
