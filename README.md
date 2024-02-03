@@ -2,5 +2,6 @@ Type:
 
 ```console
 % npm test
-% node examples/express.js
+% cd examples/express
+% node examples/express/app.js
 ```

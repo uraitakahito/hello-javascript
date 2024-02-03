@@ -5,6 +5,7 @@
     "test": "npx mocha"
   },
   "dependencies": {
+    "ejs": "*",
     "express": "*",
     "mocha": "*"
   }
