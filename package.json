@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "ejs": "*",
-    "express": "*"
+    "express": "*",
+    "multer": "*",
+    "path": "*"
   },
   "devDependencies": {
     "eslint": "*",
