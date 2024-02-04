@@ -13,6 +13,7 @@
     "eslint": "*",
     "eslint-config-google": "*",
     "eslint-plugin-mocha": "*",
-    "mocha": "*"
+    "mocha": "*",
+    "nodemon": "*"
   }
 }

@@ -4,5 +4,5 @@ Type:
 % npx mocha
 % npx eslint .
 % cd examples/express
-% node examples/express/app.js
+% npx nodemon app.js
 ```
