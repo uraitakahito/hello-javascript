@@ -7,12 +7,15 @@
   },
   "dependencies": {
     "ejs": "*",
-    "express": "*"
+    "express": "*",
+    "multer": "*",
+    "path": "*"
   },
   "devDependencies": {
     "eslint": "*",
     "eslint-config-google": "*",
     "eslint-plugin-mocha": "*",
-    "mocha": "*"
+    "mocha": "*",
+    "nodemon": "*"
   }
 }
