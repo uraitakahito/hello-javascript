@@ -6,8 +6,18 @@
       "request": "launch",
       "name": "express",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/examples/express/app.js",
+      // program - an absolute path to the Node.js program to debug.
+      "program": "${workspaceFolder}/examples/express/app.cjs",
       "cwd": "${workspaceFolder}/examples/express",
+    },
+    {
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}",
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
     },
     {
       "type": "node",
