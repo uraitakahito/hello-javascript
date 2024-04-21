@@ -1,6 +1,7 @@
 {
   "name": "hello-javascript",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "lint": "npx eslint .",
     "test": "npx mocha"
@@ -14,6 +15,7 @@
   "devDependencies": {
     "eslint": "*",
     "eslint-config-google": "*",
+    "eslint-plugin-jsdoc": "*",
     "eslint-plugin-mocha": "*",
     "mocha": "*",
     "nodemon": "*"

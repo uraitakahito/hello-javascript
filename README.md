@@ -25,5 +25,5 @@ Type:
 % npx mocha
 % npx eslint .
 % cd examples/express
-% npx nodemon app.js
+% npx nodemon app.cjs
 ```
