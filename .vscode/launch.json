@@ -6,7 +6,7 @@
       "request": "launch",
       "name": "express",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/examples/express/app.js",
+      "program": "${workspaceFolder}/examples/express/app.cjs",
       "cwd": "${workspaceFolder}/examples/express",
     },
     {
