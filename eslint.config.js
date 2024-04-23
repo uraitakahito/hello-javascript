@@ -1,8 +1,26 @@
+import globals from "globals"
+import js from '@eslint/js';
 import jsdoc from "eslint-plugin-jsdoc";
 
 export default [
   {
-    files: ["**/*.js"],
+    ignores: [
+      "**/fixtures/**",
+      "**/dist/**",
+      "node_modules/*"
+    ]
+  },
+  js.configs.recommended,
+  {
+    files: [
+      "**/*.cjs",
+      "**/*.js"
+    ],
+    languageOptions: {
+      globals: {
+        ...globals.node
+      },
+    },
     plugins: {
       jsdoc: jsdoc
     },
