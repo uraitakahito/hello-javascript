@@ -4,7 +4,7 @@ const port = 3000
 const path = require('path')
 const multer = require('multer');
 const upload = multer({ dest: 'public/uploads/' });
-app.use(express.static(path.join(__dirname, 'public')))
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
 
