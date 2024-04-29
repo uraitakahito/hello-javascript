@@ -1,3 +1,18 @@
+Type:
+
+```console
+% npx mocha
+% npx eslint .
+% cd examples/express
+% npx nodemon app.cjs
+```
+
+or
+
+```console
+% docker run -it --rm -v `pwd`:/app node sh -c "cd app/examples/fs; node stream.cjs"
+```
+
 ## version
 
 ```console
@@ -17,13 +32,4 @@ hello-javascript@1.0.0 /workspaces/hello-javascript
 ├── multer@1.4.5-lts.1
 ├── nodemon@3.0.3
 └── path@0.12.7
-```
-
-Type:
-
-```console
-% npx mocha
-% npx eslint .
-% cd examples/express
-% npx nodemon app.cjs
 ```
