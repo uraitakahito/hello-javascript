@@ -1,5 +1,3 @@
-Type:
-
 ## How to launch
 
 ```console
