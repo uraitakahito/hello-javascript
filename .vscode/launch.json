@@ -11,18 +11,29 @@
       "cwd": "${workspaceFolder}/examples/express",
     },
     {
+      "type": "node",
+      "request": "launch",
+      "name": "run selected file",
+      "skipFiles": ["<node_internals>/**"],
+      // program - an absolute path to the Node.js program to debug.
+      // ${file} - the currently open file.
+      "program": "${file}",
+      // "cwd": "${workspaceFolder}/examples/express",
+    },
+    {
+      "type": "node",
+      "request": "attach",
       "name": "Attach by Process ID",
       "processId": "${command:PickProcess}",
-      "request": "attach",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "type": "node"
     },
     {
       "type": "node",
       "request": "launch",
       "name": "Mocha All",
+      // program - an absolute path to the Node.js program to debug.
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "args": [
           "--timeout",
@@ -41,6 +52,7 @@
       "type": "node",
       "request": "launch",
       "name": "Mocha Current File",
+      // program - an absolute path to the Node.js program to debug.
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "args": [
           "--timeout",
