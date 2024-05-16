@@ -1,5 +1,3 @@
-Type:
-
 ## How to launch
 
 ```console
@@ -30,7 +28,7 @@ Type in docker:
 ```console
 % cd /app
 % npm install
-% node examples/content-negotiation
+% node examples/content-negotiation/index.js
 ```
 
 1. Select `Dev Containers: Attach to Running Container` through the `Command Palette (Shift + command + P)`
