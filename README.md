@@ -20,7 +20,7 @@ hello-javascript
 % cd /path/to
 % git clone https://github.com/expressjs/express.git
 % cd /path/to/express
-% docker run -it --rm -p 3000:3000 -v `pwd`:/app $PROJECT-image /bin/zsh
+% docker container run -it --rm --init -p 3000:3000 --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
 ```
 
 Type in docker:
