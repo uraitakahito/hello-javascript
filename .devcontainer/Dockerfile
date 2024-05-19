@@ -48,6 +48,7 @@ RUN apt-get update -qq && \
   rm -rf /var/lib/apt/lists/*
 
 COPY bin/docker-entrypoint.sh /usr/local/bin/
+COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
 USER ${user_name}
 WORKDIR /home/${user_name}
