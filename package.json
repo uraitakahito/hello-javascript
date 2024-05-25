@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "lint": "npx eslint .",
-    "test": "npx mocha"
+    "test": "npx vitest"
   },
   "dependencies": {
     "ejs": "*",
@@ -17,7 +17,7 @@
     "eslint-config-google": "*",
     "eslint-plugin-jsdoc": "*",
     "eslint-plugin-mocha": "*",
-    "mocha": "*",
-    "nodemon": "*"
+    "nodemon": "*",
+    "vitest": "*"
   }
 }
