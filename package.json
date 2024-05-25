@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "coverage": "npx vitest run --coverage",
     "lint": "npx eslint .",
-    "test": "npx vitest"
+    "test": "npx vitest",
+    "test:run": "npx vitest run"
   },
   "dependencies": {
     "ejs": "*",
@@ -18,6 +20,7 @@
     "eslint-plugin-jsdoc": "*",
     "eslint-plugin-mocha": "*",
     "nodemon": "*",
-    "vitest": "*"
+    "vitest": "*",
+    "@vitest/coverage-v8": "*"
   }
 }
