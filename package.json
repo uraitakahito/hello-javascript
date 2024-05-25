@@ -18,6 +18,7 @@
     "eslint-plugin-jsdoc": "*",
     "eslint-plugin-mocha": "*",
     "nodemon": "*",
-    "vitest": "*"
+    "vitest": "*",
+    "@vitest/coverage-v8": "*"
   }
 }
