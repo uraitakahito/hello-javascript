@@ -1,7 +1,7 @@
 ## How to launch
 
 ```console
-% npx mocha
+% npm run test:run
 % npx eslint .
 % cd examples/express
 % npx nodemon app.cjs
