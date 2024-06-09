@@ -18,7 +18,6 @@
     "eslint": "*",
     "eslint-config-google": "*",
     "eslint-plugin-jsdoc": "*",
-    "eslint-plugin-mocha": "*",
     "nodemon": "*",
     "vitest": "*",
     "@vitest/coverage-v8": "*"
