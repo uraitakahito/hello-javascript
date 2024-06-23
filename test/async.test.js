@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 // https://qiita.com/mori_goq/items/5b01666cff5134f821bd
 
 // 成功する非同期関数
