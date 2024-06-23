@@ -4,6 +4,7 @@ const port = 3000
 const path = require('path')
 const multer = require('multer');
 const upload = multer({ dest: 'public/uploads/' });
+const fs = require('fs');
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
@@ -29,6 +30,20 @@ app.post('/upload', upload.single('file'), (req, res) => {
   console.log(req.file.originalname);
   res.send(req.file.originalname + ' Uploaded');
 });
+
+app.get('/error-example-1', (req, res) => {
+  throw new Error('Hello Error');
+});
+
+app.get('/error-example-2', (req, res, next) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
+    if (err) {
+      next(err) // Pass errors to Express.
+    } else {
+      res.send(data)
+    }
+  })
+})
 
 app.use(function(req, res, next) {
   res.status(404).send('Sorry cant find that!');
