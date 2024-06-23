@@ -30,6 +30,10 @@ app.post('/upload', upload.single('file'), (req, res) => {
   res.send(req.file.originalname + ' Uploaded');
 });
 
+app.use(function(req, res, next) {
+  res.status(404).send('Sorry cant find that!');
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
