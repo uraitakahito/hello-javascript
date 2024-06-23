@@ -20,6 +20,7 @@
     "eslint-plugin-jsdoc": "*",
     "eslint-plugin-vitest":"*",
     "nodemon": "*",
+    "supertest": "*",
     "vitest": "*",
     "@vitest/coverage-v8": "*"
   }
