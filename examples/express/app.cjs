@@ -6,6 +6,13 @@ const upload = multer({ dest: 'public/uploads/' });
 const fs = require('fs');
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+// https://expressjs.com/ja/api.html#express.json
+app.use(bodyParser.json());
+
 app.set('view engine', 'ejs');
 
 app.locals.data = {
@@ -19,6 +26,23 @@ app.locals.data = {
 app.get('/', (req, res) => {
   // Perform rendering
   res.render("index.ejs", app.locals.data);
+});
+
+app.get('/hello-json-1', (req, res, next) => {
+  res.json({ message: 'Hello, JSON!' });
+});
+
+// curl -X POST \
+//   -H "Accept: application/json" \
+//   -H "Content-type: application/json" \
+//   -d '{"id" : "1", "name" : "foo"}' \
+//   http://localhost:3000/hello-json-2
+app.post('/hello-json-2', (req, res) => {
+  res.json({
+    id: req.body.id,
+    text: req.body.name
+  })
+  // res.send('OK');
 });
 
 app.get('/upload', (req, res) => {
