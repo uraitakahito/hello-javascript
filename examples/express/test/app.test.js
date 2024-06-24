@@ -16,3 +16,11 @@ describe('/static', () => {
     expect(res.status).toEqual(200)
   })
 })
+
+describe('/hello-json-1', () => {
+  it('/hello-json-1', async () => {
+    const res = await request(app).get('/hello-json-1')
+    expect(res.body.message).toEqual('Hello, JSON!')
+    expect(res.status).toEqual(200)
+  })
+})
