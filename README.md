@@ -4,6 +4,7 @@
 % npm run test:run
 % npx eslint .
 % cd examples/express
+% npx vitest run
 % npx nodemon app.cjs
 ```
 
