@@ -38,11 +38,18 @@ app.get('/hello-json-1', (req, res, next) => {
 //   -d '{"id" : "1", "name" : "foo"}' \
 //   http://localhost:3000/hello-json-2
 app.post('/hello-json-2', (req, res) => {
+  const { id, name } = req.body;
+  if (!id || !name) {
+    res.status(400).json(
+      { success: false }
+    );
+    return;
+  }
   res.json({
+    success: true,
     id: req.body.id,
     text: req.body.name
   })
-  // res.send('OK');
 });
 
 app.get('/upload', (req, res) => {
