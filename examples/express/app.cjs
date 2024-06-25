@@ -13,6 +13,15 @@ app.use(bodyParser.urlencoded({
 // https://expressjs.com/ja/api.html#express.json
 app.use(bodyParser.json());
 
+//
+// CORS
+//
+const allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+};
+app.use(allowCrossDomain);
+
 app.set('view engine', 'ejs');
 
 app.locals.data = {

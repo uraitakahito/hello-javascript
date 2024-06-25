@@ -3,6 +3,15 @@ import { describe, expect, it, test } from 'vitest';
 const request = require('supertest');
 const app = require('../app.cjs');
 
+describe('CORS', () => {
+  it('should have cors header', async () => {
+    const res = await request(app)
+      .get('/')
+      .expect('Access-Control-Allow-Origin', '*')
+    expect(res.status).toEqual(200)
+  });
+});
+
 describe('Get Endpoints', () => {
   it('/', async () => {
     const res = await request(app).get('/')
