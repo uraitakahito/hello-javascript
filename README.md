@@ -12,13 +12,14 @@ hello-javascript
 Run docker containers:
 
 ```console
-% docker container run -it --rm --init -p 3000:3000 --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
+% docker container run -it --rm --init -p 3000:3000 -e NODE_ENV=development --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
 ```
 
 Run the following commands inside the Docker containers:
 
 ```console
 % cd /app
+% npm ci
 % npm run test:run
 % npx eslint .
 % cd examples/express
@@ -37,14 +38,14 @@ Run the following commands inside the Docker containers:
 % cd /path/to
 % git clone https://github.com/expressjs/express.git
 % cd /path/to/express
-% docker container run -it --rm --init -p 3000:3000 --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
+% docker container run -it --rm --init -p 3000:3000 -e NODE_ENV=development --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
 ```
 
 Type in docker:
 
 ```console
 % cd /app
-% npm install
+% npm ci
 % node examples/content-negotiation/index.js
 ```
 
