@@ -12,7 +12,7 @@ hello-javascript
 Run docker containers:
 
 ```console
-% docker container run -it --rm --init --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
+% docker container run -it --rm --init -p 3000:3000 --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
 ```
 
 Run the following commands inside the Docker containers:
@@ -23,7 +23,7 @@ Run the following commands inside the Docker containers:
 % npx eslint .
 % cd examples/express
 % npx vitest run
-% npx nodemon app.cjs
+% npx nodemon server.cjs
 ```
 
 ## How to connect VS Code's debugger to an app or process that's already running
