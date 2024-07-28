@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "coverage": "npx vitest run --coverage",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "test:run": "cd examples/express && npx vitest run"
   },
   "dependencies": {
     "ejs": "*",
