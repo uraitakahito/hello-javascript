@@ -1,6 +1,24 @@
 ## How to launch
 
+Build the image:
+
 ```console
+% PROJECT=$(basename `pwd`)
+% echo $PROJECT
+hello-javascript
+% docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+```
+
+Run docker containers:
+
+```console
+% docker container run -it --rm --init --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
+```
+
+Run the following commands inside the Docker containers:
+
+```console
+% cd /app
 % npm run test:run
 % npx eslint .
 % cd examples/express
@@ -15,8 +33,6 @@
 % git clone git@github.com:uraitakahito/hello-javascript.git
 % cd /path/to/hello-javascript
 % PROJECT=$(basename `pwd`)
-% echo $PROJECT
-hello-javascript
 % docker image build -t $PROJECT-image ./.devcontainer --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 % cd /path/to
 % git clone https://github.com/expressjs/express.git
@@ -36,7 +52,7 @@ Type in docker:
 2. Open the `/app`
 3. Select `Debug: Attach to Node Process` through the `Command Palette (Shift + command + P)`
 
-## How to run lauch the app in docker
+## How to run the app in docker
 
 ```console
 % docker run -it --rm -v `pwd`:/app node sh -c "cd app/examples/fs; node stream.cjs"
