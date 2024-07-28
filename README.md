@@ -19,6 +19,7 @@ Run the following commands inside the Docker containers:
 
 ```console
 % cd /app
+% npm ci
 % npm run test:run
 % npx eslint .
 % cd examples/express
@@ -44,7 +45,7 @@ Type in docker:
 
 ```console
 % cd /app
-% npm install
+% npm ci
 % node examples/content-negotiation/index.js
 ```
 
