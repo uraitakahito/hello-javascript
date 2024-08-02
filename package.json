@@ -14,6 +14,7 @@
     "path": "*"
   },
   "devDependencies": {
+    "child_process": "*",
     "chokidar": "*",
     "eslint": "*",
     "eslint-config-google": "*",
