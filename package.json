@@ -14,11 +14,14 @@
     "path": "*"
   },
   "devDependencies": {
+    "child_process": "*",
+    "chokidar": "*",
     "eslint": "*",
     "eslint-config-google": "*",
     "eslint-plugin-jsdoc": "*",
     "eslint-plugin-vitest":"*",
     "nodemon": "*",
+    "path": "*",
     "supertest": "*",
     "vitest": "*",
     "@vitest/coverage-v8": "*"
