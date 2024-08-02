@@ -14,6 +14,7 @@
     "path": "*"
   },
   "devDependencies": {
+    "chokidar": "*",
     "eslint": "*",
     "eslint-config-google": "*",
     "eslint-plugin-jsdoc": "*",
