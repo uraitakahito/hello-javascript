@@ -1,6 +1,6 @@
 ## How to launch
 
-Build the image:
+Build your docker image:
 
 ```console
 % PROJECT=$(basename `pwd`)
@@ -9,7 +9,7 @@ hello-javascript
 % docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 ```
 
-Run docker containers:
+And run it:
 
 ```console
 % docker container run -it --rm --init -p 3000:3000 -e NODE_ENV=development --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
@@ -34,7 +34,7 @@ Run the following commands inside the Docker containers:
 % git clone git@github.com:uraitakahito/hello-javascript.git
 % cd /path/to/hello-javascript
 % PROJECT=$(basename `pwd`)
-% docker image build -t $PROJECT-image ./.devcontainer --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+% docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 % cd /path/to
 % git clone https://github.com/expressjs/express.git
 % cd /path/to/express
