@@ -1,5 +1,5 @@
 # Debian 12
-FROM node:22.2.0-bookworm
+FROM node:22.6.0-bookworm
 
 ARG user_name=developer
 ARG user_id
@@ -10,7 +10,6 @@ ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 # Install packages
 #
 RUN apt-get update -qq && \
-  apt-get upgrade -y -qq && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
     # Basic
     ca-certificates \
@@ -31,7 +30,6 @@ RUN apt-get update -qq && \
 # https://github.com/eza-community/eza/blob/main/INSTALL.md
 #
 RUN apt-get update -qq && \
-  apt-get upgrade -y -qq && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
     gpg \
     wget && \
@@ -72,5 +70,6 @@ RUN cd /home/${user_name} && \
 # express server
 EXPOSE 3000
 
+WORKDIR /app
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["tail", "-F", "/dev/null"]
