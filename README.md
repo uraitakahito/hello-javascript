@@ -18,7 +18,6 @@ docker container run -it --rm --init -p 3000:3000 -e NODE_ENV=development --moun
 Run the following commands inside the Docker containers:
 
 ```sh
-cd /app
 npm ci
 npm run test:run
 npx eslint .

@@ -70,5 +70,6 @@ RUN cd /home/${user_name} && \
 # express server
 EXPOSE 3000
 
+WORKDIR /app
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["tail", "-F", "/dev/null"]
