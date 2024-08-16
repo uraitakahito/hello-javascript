@@ -32,40 +32,44 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Mocha All",
-      // program - an absolute path to the Node.js program to debug.
-      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-      "args": [
-          "--timeout",
-          "999999",
-          "--colors",
-          "${workspaceFolder}/test"
+      "name": "Debug current Vitest file",
+      "autoAttachChildProcesses": true,
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/**"
       ],
+      // program - an absolute path to the Node.js program to debug.
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "args": [
+        "run",
+        "${relativeFile}"
+      ],
+      "smartStep": true,
       // what kind of console to use, for example, internalConsole, integratedTerminal, or externalTerminal
       "console": "integratedTerminal",
+      // the visibility of the Debug Console panel during a debugging session.
       "internalConsoleOptions": "neverOpen",
-      "skipFiles": [
-          "<node_internals>/**/*.js"
-      ]
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Mocha Current File",
-      // program - an absolute path to the Node.js program to debug.
-      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-      "args": [
-          "--timeout",
-          "999999",
-          "--colors",
-          "${file}"
+      "name": "Debug ALL Vitest files",
+      "autoAttachChildProcesses": true,
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/**"
       ],
+      // program - an absolute path to the Node.js program to debug.
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "args": [
+        "run",
+        "${workspaceFolder}/test"
+      ],
+      "smartStep": true,
       // what kind of console to use, for example, internalConsole, integratedTerminal, or externalTerminal
       "console": "integratedTerminal",
+      // the visibility of the Debug Console panel during a debugging session.
       "internalConsoleOptions": "neverOpen",
-      "skipFiles": [
-          "<node_internals>/**/*.js"
-      ]
-    }
+    },
   ]
 }
