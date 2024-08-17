@@ -23,6 +23,7 @@ const allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 
 app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, "views"));
 
 app.locals.data = {
   items: [

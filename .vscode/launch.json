@@ -61,9 +61,9 @@
       ],
       // program - an absolute path to the Node.js program to debug.
       "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "cwd": "${workspaceFolder}",
       "args": [
         "run",
-        "${workspaceFolder}/test"
       ],
       "smartStep": true,
       // what kind of console to use, for example, internalConsole, integratedTerminal, or externalTerminal
