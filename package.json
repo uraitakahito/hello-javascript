@@ -8,7 +8,6 @@
     "test:run": "cd examples/express && npx vitest run"
   },
   "dependencies": {
-    "ejs": "*",
     "express": "*",
     "multer": "*",
     "path": "*"
@@ -18,6 +17,7 @@
     "app-root-path": "^3.1.0",
     "child_process": "*",
     "chokidar": "*",
+    "ejs": "^3.1.10",
     "eslint": "*",
     "eslint-config-google": "*",
     "eslint-plugin-jsdoc": "*",
