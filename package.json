@@ -7,11 +7,6 @@
     "lint": "npx eslint .",
     "test:run": "cd examples/express && npx vitest run"
   },
-  "dependencies": {
-    "express": "*",
-    "multer": "*",
-    "path": "*"
-  },
   "devDependencies": {
     "@vitest/coverage-v8": "*",
     "app-root-path": "^3.1.0",
@@ -22,8 +17,10 @@
     "eslint-config-google": "*",
     "eslint-plugin-jsdoc": "*",
     "eslint-plugin-vitest": "*",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "*",
-    "path": "*",
+    "path": "^0.12.7",
     "supertest": "*",
     "vitest": "*"
   }
