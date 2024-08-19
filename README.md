@@ -18,7 +18,6 @@ Run the following commands inside the Docker containers:
 npm ci
 npm run test:run
 npx eslint .
-cd examples/express
 npx vitest run
 npx vitest run --project express
 npx nodemon server.cjs
