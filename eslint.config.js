@@ -15,6 +15,7 @@ export default [
   {
     files: [
       "**/*.cjs",
+      "**/*.mjs",
       "**/*.js"
     ],
     languageOptions: {
