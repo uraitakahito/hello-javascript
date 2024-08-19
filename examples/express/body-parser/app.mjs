@@ -14,7 +14,6 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({extended: false}));
 
-// ※トップページ
 app.get('/', (req, res) => {
   var msg = 'Input your message';
   res.render('index.ejs',
@@ -24,7 +23,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// ※POST送信の処理
 app.post('/', (req, res) => {
   var msg = req.body.message;
   res.render('index.ejs',
