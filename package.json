@@ -10,6 +10,7 @@
     "test:run": "cd examples/express && npx vitest run"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
     "@vitest/coverage-v8": "*",
     "app-root-path": "^3.1.0",
     "child_process": "*",
