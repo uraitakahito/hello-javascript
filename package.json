@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "coverage": "npx vitest run --coverage",
-    "lint": "npx eslint .",
+    "lint": "eslint .",
     "test:run": "cd examples/express && npx vitest run"
   },
   "devDependencies": {
@@ -15,7 +15,7 @@
     "child_process": "*",
     "chokidar": "*",
     "ejs": "^3.1.10",
-    "eslint": "^8.57.0",
+    "eslint": "*",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "*",
