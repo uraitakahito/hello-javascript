@@ -15,22 +15,6 @@ const allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
 
-app.set('view engine', 'ejs');
-app.set("views", path.join(__dirname, "views"));
-
-app.locals.data = {
-  items: [
-    {name: "<h1>リンゴ</h1>"},
-    {name: "<h2>バナナ</h2>"},
-    {name: "<h3>スイカ</h3>"}
-  ]
-};
-
-app.get('/', (req, res) => {
-  // Perform rendering
-  res.render("index.ejs", app.locals.data);
-});
-
 app.get('/upload', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/upload.html'))
 });
