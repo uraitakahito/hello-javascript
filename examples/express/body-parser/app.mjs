@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
   });
 });
 
+// curl -X POST -d 'message=foo' http://localhost:3000/
 app.post('/', (req, res) => {
   var msg = req.body.message;
   res.render('index.ejs',
