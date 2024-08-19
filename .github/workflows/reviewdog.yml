@@ -1,5 +1,10 @@
 name: reviewdog
-on: [pull_request]
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
 jobs:
   eslint:
     name: runner / eslint
