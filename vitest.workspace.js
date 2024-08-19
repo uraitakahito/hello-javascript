@@ -15,7 +15,7 @@ export default defineWorkspace([
     test: {
       name: 'express',
       include: ['test/**/*.test.{ts,js}'],
-      root: 'examples/express',
+      root: 'examples/express/etc',
       environment: 'node',
     },
   },
