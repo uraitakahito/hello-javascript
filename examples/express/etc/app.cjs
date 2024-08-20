@@ -13,6 +13,14 @@ const allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+});
+
+app.get('/hello-json-1', (req, res, next) => {
+  res.json({ message: 'Hello, JSON!' });
+});
+
 app.get('/error-example-1', (req, res) => {
   throw new Error('Hello Error');
 });

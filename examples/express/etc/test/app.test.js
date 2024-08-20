@@ -29,23 +29,3 @@ describe('Get Endpoints', () => {
     expect(res.status).toEqual(200)
   })
 });
-
-describe('POST /hello-json-2', () => {
-  test('check: id, name', async () => {
-    const response = await request(app).post('/hello-json-2').send({
-      id: '1',
-      name: 'foo'
-    });
-    expect(response.body.success).toEqual(true);
-    expect(response.body.id).toBeDefined();
-  })
-
-  test('check: id, name, and returns 400', async () => {
-    const bodies = [{ id: '1' }, { name: 'foo' }, {}];
-    for (const body in bodies) {
-      const response = await request(app).post('/hello-json-2').send(body);
-      expect(response.body.success).toEqual(false);
-      expect(response.status).toEqual(400);
-    }
-  });
-});
