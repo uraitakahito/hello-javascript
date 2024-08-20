@@ -2,11 +2,13 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const upload = multer({ dest: path.join(__dirname, 'public/uploads/') });
+const updir = path.join(__dirname, 'public/uploads/');
+const upload = multer({ dest: updir });
 export var app = express();
 
 app.get('/upload', (req, res) => {
@@ -15,5 +17,9 @@ app.get('/upload', (req, res) => {
 
 app.post('/upload', upload.single('file'), (req, res) => {
   console.log(req.file.originalname);
-  res.send(req.file.originalname + ' Uploaded');
+
+  const path = req.file.path.replace(/\\/g, "/")
+  const dest = updir + req.file.originalname;
+  fs.renameSync(path, dest);
+  res.send(dest + ' Uploaded');
 });
