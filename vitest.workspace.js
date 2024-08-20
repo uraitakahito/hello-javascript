@@ -13,9 +13,9 @@ export default defineWorkspace([
   },
   {
     test: {
-      name: 'express',
+      name: 'express - multer-upload',
       include: ['test/**/*.test.{ts,js}'],
-      root: 'examples/express/etc',
+      root: 'examples/express/multer-upload',
       environment: 'node',
     },
   },

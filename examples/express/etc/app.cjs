@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const multer = require('multer');
-const upload = multer({ dest: 'public/uploads/' });
 const fs = require('fs');
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
@@ -14,15 +12,6 @@ const allowCrossDomain = function(req, res, next) {
   next();
 };
 app.use(allowCrossDomain);
-
-app.get('/upload', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/upload.html'))
-});
-
-app.post('/upload', upload.single('file'), (req, res) => {
-  console.log(req.file.originalname);
-  res.send(req.file.originalname + ' Uploaded');
-});
 
 app.get('/error-example-1', (req, res) => {
   throw new Error('Hello Error');
