@@ -1,4 +1,4 @@
-const fs = require('node:fs');
+import fs from 'node:fs';
 
 const readStream = fs.createReadStream("./a.txt", {
   highWaterMark: 2
