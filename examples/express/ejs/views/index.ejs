@@ -1,5 +1,10 @@
-<ul>
-  <% for (let item of items) { %>
-      <li><%- item.name %></li>
-  <% } %>
-</ul>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+  </head>
+  <body>
+    <%- include("./item.ejs", items) %>
+  </body>
+</html>
