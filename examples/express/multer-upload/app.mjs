@@ -15,6 +15,7 @@ app.get('/upload', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/upload.html'))
 });
 
+// curl -X POST -F file=@./test.txt http://localhost:3000/upload
 app.post('/upload', upload.single('file'), (req, res) => {
   console.log(req.file.originalname);
 
