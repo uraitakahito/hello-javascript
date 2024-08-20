@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const upload = multer({ dest: 'public/uploads/' });
+const upload = multer({ dest: path.join(__dirname, 'public/uploads/') });
 export var app = express();
 
 app.get('/upload', (req, res) => {
