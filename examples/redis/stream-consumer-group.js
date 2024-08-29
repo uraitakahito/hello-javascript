@@ -49,7 +49,7 @@ try {
 
 console.log(`Starting consumer ${consumerName}.`);
 
-while (true) {
+for (;;) {
   try {
     // https://redis.io/commands/xreadgroup/
     let response = await client.xReadGroup(
