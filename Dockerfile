@@ -45,7 +45,6 @@ RUN cd /usr/src && \
   UPGRADEPACKAGES=false \
     /usr/src/features/src/common-utils/install.sh
 USER ${user_name}
-WORKDIR /home/${user_name}
 
 #
 # dotfiles
