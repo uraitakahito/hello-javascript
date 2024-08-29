@@ -7,7 +7,7 @@
   "scripts": {
     "coverage": "npx vitest run --coverage",
     "lint": "eslint .",
-    "test:run": "cd examples/express && npx vitest run"
+    "test:run": "npx vitest run"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "*",
