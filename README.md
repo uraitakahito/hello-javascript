@@ -23,10 +23,9 @@ npx vitest run --project node
 npx nodemon examples/express/ejs/server.mjs
 ```
 
-## How to connect VS Code's debugger to an app or process that's already running
+## How to connect VS Code's debugger to an other app
 
 ```sh
-cd /path/to
 git clone git@github.com:uraitakahito/hello-javascript.git
 cd /path/to/hello-javascript
 PROJECT=$(basename `pwd`)
@@ -40,7 +39,6 @@ docker container run -it --rm --init -p 3000:3000 -e NODE_ENV=development --moun
 Type in docker:
 
 ```sh
-cd /app
 npm ci
 node examples/content-negotiation/index.js
 ```
