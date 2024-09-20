@@ -4,15 +4,6 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "express",
-      "skipFiles": ["<node_internals>/**"],
-      // program - an absolute path to the Node.js program to debug.
-      "program": "${workspaceFolder}/examples/express/server.cjs",
-      "cwd": "${workspaceFolder}/examples/express",
-    },
-    {
-      "type": "node",
-      "request": "launch",
       "name": "run selected file",
       "skipFiles": ["<node_internals>/**"],
       // program - an absolute path to the Node.js program to debug.
