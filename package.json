@@ -13,7 +13,6 @@
     "@vitest/coverage-v8": "*",
     "app-root-path": "^3.1.0",
     "child_process": "*",
-    "chokidar": "*",
     "ejs": "^3.1.10",
     "eslint": "*",
     "eslint-config-airbnb-base": "^15.0.0",
