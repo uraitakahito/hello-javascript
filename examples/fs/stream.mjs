@@ -1,6 +1,12 @@
 import fs from 'node:fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-const readStream = fs.createReadStream("./a.txt", {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const target = path.join(__dirname, 'a.txt');
+
+const readStream = fs.createReadStream(target, {
   highWaterMark: 2
 });
 readStream.on("end", function () {

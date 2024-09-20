@@ -20,7 +20,6 @@ npm run test:run
 npx eslint .
 npx vitest run
 npx vitest run --project node
-npx nodemon examples/express/ejs/server.mjs
 ```
 
 ## How to connect VS Code's debugger to an other app

@@ -10,10 +10,10 @@
     "test:run": "npx vitest run"
   },
   "devDependencies": {
+    "@apify/ps-tree": "^1.2.0",
     "@vitest/coverage-v8": "*",
     "app-root-path": "^3.1.0",
     "child_process": "*",
-    "chokidar": "*",
     "ejs": "^3.1.10",
     "eslint": "*",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -22,7 +22,6 @@
     "eslint-plugin-vitest": "*",
     "express": "^4.19.2",
     "multer": "^1.4.5-lts.1",
-    "nodemon": "*",
     "path": "^0.12.7",
     "redis": "^4.7.0",
     "supertest": "*",
