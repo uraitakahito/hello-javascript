@@ -30,6 +30,7 @@
   },
   "workspaces": [
     "packages/fs-example",
-    "packages/websocket"
+    "packages/websocket",
+    "packages/async-local-storage-example"
   ]
 }
