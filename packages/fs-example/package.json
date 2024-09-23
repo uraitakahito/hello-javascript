@@ -1,0 +1,14 @@
+{
+  "name": "fs-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "example": "node stream.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "path": "^0.12.7"
+  }
+}
