@@ -16,6 +16,7 @@ Run the following commands inside the Docker containers:
 
 ```sh
 npm ci
+npm -w packages/fs-example example
 npm run test:run
 npx eslint .
 npx vitest run
