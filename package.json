@@ -29,6 +29,7 @@
     "winston": "^3.14.2"
   },
   "workspaces": [
-    "packages/fs-example"
+    "packages/fs-example",
+    "packages/websocket"
   ]
 }
