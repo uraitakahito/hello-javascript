@@ -32,6 +32,7 @@
   "workspaces": [
     "packages/fs-example",
     "packages/websocket",
-    "packages/async-local-storage-example"
+    "packages/async-local-storage-example",
+    "packages/ps-tree"
   ]
 }
