@@ -33,6 +33,6 @@
     // https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck
     "timonwong.shellcheck",
     // https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
-    "usernamehw.errorlens",
+    "usernamehw.errorlens"
   ]
 }
