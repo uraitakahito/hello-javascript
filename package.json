@@ -23,6 +23,7 @@
     "eslint-plugin-vitest": "*",
     "jest": "^29.7.0",
     "path": "^0.12.7",
+    "prettier": "^3.3.3",
     "redis": "^4.7.0",
     "supertest": "*",
     "vitest": "*",
