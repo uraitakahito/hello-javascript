@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "test:jest:run": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest test-jest",
     "test:vitest:run": "npx vitest run",
-    "rmdir": "node -e \"var fs = require('fs'); try{process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true }))}catch(err){console.log(err)}; process.exit(0);\""
+    "rmdir": "node -e \"var fs = require('fs'); try{process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true }))}catch(err){console.log(err)}; process.exit(0);\"",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@vitest/coverage-v8": "*",
