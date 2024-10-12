@@ -7,14 +7,14 @@ PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg 
 And run it:
 
 ```sh
-docker container run -d --rm --init -p 3000:3000 -e NODE_ENV=development --mount type=bind,src=`pwd`,dst=/app --mount type=bind,src=$HOME/.gitconfig,dst=/home/developer/.gitconfig --name $PROJECT-container $PROJECT-image
+docker container run -d --rm --init -e NODE_ENV=development --mount type=bind,src=`pwd`,dst=/app --mount type=bind,src=$HOME/.gitconfig,dst=/home/developer/.gitconfig --name $PROJECT-container $PROJECT-image
 ```
 
 Run any commands inside the Docker containers as needed:
 
 ```sh
 npm ci
-npm run test:run
+npm run test:jest:run
 npx eslint .
 npx vitest run
 npx vitest run --project node

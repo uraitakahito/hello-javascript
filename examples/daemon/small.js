@@ -28,7 +28,7 @@ const main = async () => {
   await main();
 })();
 
-console.log('process ID: ', process.pid);
+console.log("process ID: ", process.pid);
 
 const exit = (signal) => {
   receivedSignal = signal;

@@ -1,11 +1,8 @@
 const getName = () => {
-  return 'hoge';
+  return "hoge";
 };
 const getAge = () => {
   return 18;
 };
 
-export {
-  getName,
-  getAge,
-};
+export { getName, getAge };

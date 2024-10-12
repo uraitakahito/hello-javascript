@@ -8,5 +8,14 @@
   // Prettier
   //
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": false
+  "editor.formatOnSave": false,
+  //
+  // Jest
+  //
+  // https://github.com/jest-community/vscode-jest/issues/666#issuecomment-903216286
+  // "jest.jestCommandLine": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+  // https://github.com/jest-community/vscode-jest/issues/666#issuecomment-971909596
+  "jest.nodeEnv": {
+    "NODE_OPTIONS": "--experimental-vm-modules"
+  }
 }
