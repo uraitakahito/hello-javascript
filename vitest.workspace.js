@@ -6,25 +6,9 @@ export default defineWorkspace([
   {
     test: {
       name: 'node',
-      include: ['test/**/*.test.{ts,js}'],
+      include: ['test-vitest/**/*.test.{ts,js}'],
       environment: 'node',
       // setupFiles: ['./setup.init.js'],
-    },
-  },
-  {
-    test: {
-      name: 'express - etc',
-      include: ['test/**/*.test.{ts,js}'],
-      root: 'examples/express/etc',
-      environment: 'node',
-    },
-  },
-  {
-    test: {
-      name: 'express - multer-upload',
-      include: ['test/**/*.test.{ts,js}'],
-      root: 'examples/express/multer-upload',
-      environment: 'node',
     },
   },
 ])
