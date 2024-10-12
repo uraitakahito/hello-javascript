@@ -5,6 +5,7 @@ import { defineWorkspace } from "vitest/config";
 export default defineWorkspace([
   {
     test: {
+      globals: true,
       name: "node",
       include: ["test-vitest/**/*.test.{ts,js}"],
       environment: "node",

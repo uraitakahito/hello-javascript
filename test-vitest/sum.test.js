@@ -1,4 +1,3 @@
-import { describe, expect, test } from "vitest";
 import { sum } from "../src/sum.js";
 
 describe("sum.js", () => {

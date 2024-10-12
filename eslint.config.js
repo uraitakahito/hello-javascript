@@ -12,6 +12,21 @@ const testJestConfig = {
   },
 };
 
+const testVitestConfig = {
+  files: ["test-vitest/**/*.test.{js,ts,tsx}"],
+  languageOptions: {
+    globals: {
+      ...vitest.environments.env.globals
+    },
+  },
+  plugins: {
+    vitest: vitest,
+  },
+  rules: {
+    ...vitest.configs.recommended.rules, // you can also use vitest.configs.all.rules to enable all rules
+  },
+};
+
 export default [
   {
     ignores: ["**/fixtures/**", "**/dist/**", "node_modules/*"],
@@ -26,13 +41,12 @@ export default [
     },
     plugins: {
       jsdoc: jsdoc,
-      vitest: vitest,
     },
     rules: {
       "jsdoc/require-description": "error",
       "jsdoc/check-values": "error",
-      ...vitest.configs.recommended.rules, // you can also use vitest.configs.all.rules to enable all rules
     },
   },
   testJestConfig,
+  testVitestConfig
 ];
