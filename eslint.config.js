@@ -4,7 +4,7 @@ import jsdoc from "eslint-plugin-jsdoc";
 import vitest from "eslint-plugin-vitest";
 
 const testJestConfig = {
-  files: ["test-jest/**/*.test.{js,ts,tsx}"],
+  files: ["{test,test-jest}/**/*.test.{js,ts,tsx}"],
   languageOptions: {
     globals: {
       ...globals.jest,
@@ -13,7 +13,7 @@ const testJestConfig = {
 };
 
 const testVitestConfig = {
-  files: ["test-vitest/**/*.test.{js,ts,tsx}"],
+  files: ["{test,test-vitest}/**/*.test.{js,ts,tsx}"],
   languageOptions: {
     globals: {
       ...vitest.environments.env.globals

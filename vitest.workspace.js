@@ -7,7 +7,7 @@ export default defineWorkspace([
     test: {
       globals: true,
       name: "node",
-      include: ["test-vitest/**/*.test.{ts,js}"],
+      include: ["{test,test-vitest}/**/*.test.{ts,js}"],
       environment: "node",
       // setupFiles: ['./setup.init.js'],
     },
