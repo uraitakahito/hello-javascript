@@ -8,5 +8,9 @@
   // Prettier
   //
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": false
+  "editor.formatOnSave": false,
+  //
+  // Jest
+  //
+  "jest.jestCommandLine": "NODE_OPTIONS=--experimental-vm-modules npx jest"
 }
