@@ -2,9 +2,9 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "run selected file",
       "type": "node",
       "request": "launch",
-      "name": "run selected file",
       "skipFiles": ["<node_internals>/**"],
       // program - an absolute path to the Node.js program to debug.
       // ${file} - the currently open file.
@@ -12,16 +12,9 @@
       // "cwd": "${workspaceFolder}/examples/express",
     },
     {
-      "type": "node",
-      "request": "attach",
-      "name": "Attach by Process ID",
-      "processId": "${command:PickProcess}",
-      "skipFiles": ["<node_internals>/**"]
-    },
-    {
+      "name": "Debug current Vitest Test",
       "type": "node",
       "request": "launch",
-      "name": "Debug current Vitest Test",
       "autoAttachChildProcesses": true,
       "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       // program - an absolute path to the Node.js program to debug.
@@ -49,9 +42,9 @@
       "internalConsoleOptions": "neverOpen"
     },
     {
+      "name": "Debug ALL Vitest Tests",
       "type": "node",
       "request": "launch",
-      "name": "Debug ALL Vitest Tests",
       "autoAttachChildProcesses": true,
       "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       // program - an absolute path to the Node.js program to debug.
@@ -77,6 +70,13 @@
       "console": "integratedTerminal",
       // the visibility of the Debug Console panel during a debugging session.
       "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Attach by Process ID",
+      "type": "node",
+      "request": "attach",
+      "processId": "${command:PickProcess}",
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
