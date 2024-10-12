@@ -1,9 +1,9 @@
-import { jest } from '@jest/globals'
+import { jest } from "@jest/globals";
 import { forEach } from "../src/forEach.js";
 
-const mockCallback = jest.fn(x => 42 + x);
+const mockCallback = jest.fn((x) => 42 + x);
 
-test('forEach mock function', () => {
+test("forEach mock function", () => {
   forEach([0, 1], mockCallback);
 
   // The mock function was called twice

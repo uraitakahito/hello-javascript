@@ -4,11 +4,26 @@ import jsdoc from "eslint-plugin-jsdoc";
 import vitest from "eslint-plugin-vitest";
 
 const testJestConfig = {
-  files: ["test-jest/**/*.test.{js,ts,tsx}"],
+  files: ["{test,test-jest}/**/*.test.{js,ts,tsx}"],
   languageOptions: {
     globals: {
       ...globals.jest,
     },
+  },
+};
+
+const testVitestConfig = {
+  files: ["{test,test-vitest}/**/*.test.{js,ts,tsx}"],
+  languageOptions: {
+    globals: {
+      ...vitest.environments.env.globals,
+    },
+  },
+  plugins: {
+    vitest: vitest,
+  },
+  rules: {
+    ...vitest.configs.recommended.rules, // you can also use vitest.configs.all.rules to enable all rules
   },
 };
 
@@ -26,13 +41,12 @@ export default [
     },
     plugins: {
       jsdoc: jsdoc,
-      vitest: vitest,
     },
     rules: {
       "jsdoc/require-description": "error",
       "jsdoc/check-values": "error",
-      ...vitest.configs.recommended.rules, // you can also use vitest.configs.all.rules to enable all rules
     },
   },
   testJestConfig,
+  testVitestConfig,
 ];
