@@ -21,7 +21,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug current Vitest file",
+      "name": "Debug current Vitest Test",
       "autoAttachChildProcesses": true,
       "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       // program - an absolute path to the Node.js program to debug.
@@ -34,9 +34,24 @@
       "internalConsoleOptions": "neverOpen"
     },
     {
+      "name": "Debug current Jest Test",
       "type": "node",
       "request": "launch",
-      "name": "Debug ALL Vitest files",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "--experimental-vm-modules",
+        "${workspaceRoot}/node_modules/.bin/jest",
+        "--runInBand",
+        "${relativeFile}"
+      ],
+      "console": "integratedTerminal",
+      // the visibility of the Debug Console panel during a debugging session.
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug ALL Vitest Tests",
       "autoAttachChildProcesses": true,
       "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       // program - an absolute path to the Node.js program to debug.
@@ -45,6 +60,20 @@
       "args": ["run"],
       "smartStep": true,
       // what kind of console to use, for example, internalConsole, integratedTerminal, or externalTerminal
+      "console": "integratedTerminal",
+      // the visibility of the Debug Console panel during a debugging session.
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "Debug ALL Jest Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "--experimental-vm-modules",
+        "${workspaceRoot}/node_modules/.bin/jest",
+        "--runInBand"
+      ],
       "console": "integratedTerminal",
       // the visibility of the Debug Console panel during a debugging session.
       "internalConsoleOptions": "neverOpen"
