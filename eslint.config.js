@@ -16,7 +16,7 @@ const testVitestConfig = {
   files: ["{test,test-vitest}/**/*.test.{js,ts,tsx}"],
   languageOptions: {
     globals: {
-      ...vitest.environments.env.globals
+      ...vitest.environments.env.globals,
     },
   },
   plugins: {
@@ -48,5 +48,5 @@ export default [
     },
   },
   testJestConfig,
-  testVitestConfig
+  testVitestConfig,
 ];
