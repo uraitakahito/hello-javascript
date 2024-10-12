@@ -14,7 +14,7 @@ Run any commands inside the Docker containers as needed:
 
 ```sh
 npm ci
-npm run test:run
+npm run test:jest:run
 npx eslint .
 npx vitest run
 npx vitest run --project node
