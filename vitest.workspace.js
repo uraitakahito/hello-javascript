@@ -1,3 +1,6 @@
+// If present, vitest will read your root `vite.config.ts`
+// https://vitest.dev/guide/#configuring-vitest
+
 // https://vitest.dev/guide/workspace
 import { defineWorkspace } from "vitest/config";
 
