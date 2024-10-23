@@ -6,16 +6,16 @@ on:
     branches: [main, develop]
 
 jobs:
-  eslint:
-    name: runner / eslint
+  biome:
+    name: runner / Biome
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - uses: reviewdog/action-eslint@v1
+      - uses: mongolyy/reviewdog-action-biome@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review # Change reporter.
-          eslint_flags: "{examples,src,test}/**/*.{js,cjs,mjs}"
+          reporter: github-pr-review
+          fail_on_error: true
