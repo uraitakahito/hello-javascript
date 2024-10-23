@@ -24,6 +24,7 @@
     "eslint-plugin-jsdoc": "*",
     "eslint-plugin-vitest": "*",
     "jest": "^29.7.0",
+    "jsdom": "^25.0.1",
     "path": "^0.12.7",
     "prettier": "^3.3.3",
     "redis": "^4.7.0",
