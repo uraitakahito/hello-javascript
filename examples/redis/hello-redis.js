@@ -7,7 +7,7 @@ const client = await createClient({
 	.on("error", (err) => console.log("Redis Client Error", err))
 	.connect();
 
-let data = await client.ping();
+const data = await client.ping();
 console.log("PING:", data);
 await client.set("key", "foo");
 const value = await client.get("key");

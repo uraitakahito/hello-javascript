@@ -21,7 +21,7 @@
 //
 // $ node stream-consumer-group.js consumer2
 
-import { createClient, commandOptions } from "redis";
+import { commandOptions, createClient } from "redis";
 
 const client = await createClient({
 	url: "redis://redis-server:6379",

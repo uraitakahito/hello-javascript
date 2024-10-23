@@ -1,7 +1,7 @@
-var timer = function (name) {
+var timer = (name) => {
 	var start = performance.now();
 	return {
-		stop: function () {
+		stop: () => {
 			var end = performance.now();
 			var time = end - start;
 			console.log("Timer:", name, "finished in", time, "ms");
