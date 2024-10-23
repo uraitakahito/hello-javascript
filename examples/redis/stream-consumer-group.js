@@ -52,7 +52,7 @@ console.log(`Starting consumer ${consumerName}.`);
 for (;;) {
 	try {
 		// https://redis.io/commands/xreadgroup/
-		let response = await client.xReadGroup(
+		const response = await client.xReadGroup(
 			commandOptions({
 				isolated: true,
 			}),
