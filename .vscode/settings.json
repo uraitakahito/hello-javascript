@@ -5,11 +5,6 @@
 //   Linux $HOME/.config/Code/User/settings.json
 {
   //
-  // Prettier
-  //
-  "editor.formatOnPaste": false,
-  "editor.formatOnSave": false,
-  //
   // Jest
   //
   "jest.jestCommandLine": "node_modules/.bin/jest --config jest.config.mjs",
