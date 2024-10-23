@@ -4,19 +4,14 @@
 //   macOS $HOME/Library/Application\ Support/Code/User/settings.json
 //   Linux $HOME/.config/Code/User/settings.json
 {
-  //
-  // Prettier
-  //
-  "editor.formatOnPaste": false,
-  "editor.formatOnSave": false,
-  //
-  // Jest
-  //
-  "jest.jestCommandLine": "node_modules/.bin/jest --config jest.config.mjs",
-  // https://github.com/jest-community/vscode-jest/issues/666#issuecomment-903216286
-  // "jest.jestCommandLine": "NODE_OPTIONS=--experimental-vm-modules npx jest"
-  // https://github.com/jest-community/vscode-jest/issues/666#issuecomment-971909596
-  "jest.nodeEnv": {
-    "NODE_OPTIONS": "--experimental-vm-modules"
-  }
+	//
+	// Jest
+	//
+	"jest.jestCommandLine": "node_modules/.bin/jest --config jest.config.mjs",
+	// https://github.com/jest-community/vscode-jest/issues/666#issuecomment-903216286
+	// "jest.jestCommandLine": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+	// https://github.com/jest-community/vscode-jest/issues/666#issuecomment-971909596
+	"jest.nodeEnv": {
+		"NODE_OPTIONS": "--experimental-vm-modules"
+	}
 }

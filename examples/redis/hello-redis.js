@@ -2,12 +2,12 @@
 import { createClient } from "redis";
 
 const client = await createClient({
-  url: "redis://redis-server:6379",
+	url: "redis://redis-server:6379",
 })
-  .on("error", (err) => console.log("Redis Client Error", err))
-  .connect();
+	.on("error", (err) => console.log("Redis Client Error", err))
+	.connect();
 
-let data = await client.ping();
+const data = await client.ping();
 console.log("PING:", data);
 await client.set("key", "foo");
 const value = await client.get("key");
