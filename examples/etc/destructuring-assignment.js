@@ -6,7 +6,7 @@ var d = 3;
 console.log(a, b, c, d); // => 1 2 {d: 3} 3
 
 function fullName({ first, last }) {
-	return first + last;
+  return first + last;
 }
 
-console.log(fullName({ first: "John", last: "Doe" })); // => JohnDoe
+console.log(fullName({ first: 'John', last: 'Doe' })); // => JohnDoe

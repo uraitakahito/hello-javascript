@@ -24,8 +24,24 @@
 		}
 	},
 	"javascript": {
+		// https://github.com/airbnb/javascript
+		// https://mitsuruog.github.io/javascript-style-guide/
 		"formatter": {
-			"quoteStyle": "double"
+			// https://github.com/airbnb/javascript?tab=readme-ov-file#strings--line-length
+			"lineWidth": 100,
+			// https://github.com/airbnb/javascript?tab=readme-ov-file#strings
+			"quoteStyle": "single",
+			// https://github.com/airbnb/javascript?tab=readme-ov-file#whitespace
+			"indentStyle": "space",
+			"indentWidth": 2,
+			// https://github.com/airbnb/javascript?tab=readme-ov-file#commas--dangling
+			// https://biomejs.dev/reference/configuration/#javascriptformattertrailingcomma
+			"trailingCommas": "all",
+			// https://github.com/airbnb/javascript?tab=readme-ov-file#semicolons
+			"semicolons": "always",
+
+			// https://biomejs.dev/reference/configuration/#javascriptformatterlineending
+			"lineEnding": "lf"
 		}
 	}
 }
