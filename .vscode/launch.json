@@ -8,8 +8,10 @@
 			"skipFiles": ["<node_internals>/**"],
 			// program - an absolute path to the Node.js program to debug.
 			// ${file} - the currently open file.
-			"program": "${file}"
+			"program": "${file}",
 			// "cwd": "${workspaceFolder}/examples/express",
+			// break immediately when the program launches
+			"stopOnEntry": true
 		},
 		{
 			"name": "Debug current Vitest Test",
@@ -24,7 +26,9 @@
 			// what kind of console to use, for example, internalConsole, integratedTerminal, or externalTerminal
 			"console": "integratedTerminal",
 			// the visibility of the Debug Console panel during a debugging session.
-			"internalConsoleOptions": "neverOpen"
+			"internalConsoleOptions": "neverOpen",
+			// break immediately when the program launches
+			"stopOnEntry": false
 		},
 		{
 			"name": "Debug current Jest Test",
