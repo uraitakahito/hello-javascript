@@ -1,17 +1,18 @@
-var timer = (name) => {
-  var start = performance.now();
+const timer = (name) => {
+  const start = performance.now();
   return {
     stop: () => {
-      var end = performance.now();
-      var time = end - start;
-      console.log('Timer:', name, 'finished in', time, 'ms');
+      const end = performance.now(),
+        time = end - start;
+      console.log("Timer:", name, "finished in", time, "ms");
     },
   };
 };
 
-var t = timer('Some label');
+const t = timer("Some label");
 
-for (let i = 0; i < 1000000; i++) {
+// eslint-disable-next-line no-magic-numbers
+for (let i = 0; i < 1000000; i += 1) {
   //
 }
 
