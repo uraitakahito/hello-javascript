@@ -51,6 +51,8 @@ module.exports = {
     "id-length": "off",
     // https://eslint.org/docs/v8.x/rules/multiline-comment-style
     "multiline-comment-style": "off",
+    // https://eslint.org/docs/v8.x/rules/no-console
+    "no-console": "off",
     // https://eslint.org/docs/v8.x/rules/no-ternary
     "no-ternary": "off",
   },
