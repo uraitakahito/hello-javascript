@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@vitest/coverage-v8": "*",
+    "@vitest/eslint-plugin": "^1.1.10",
     "app-root-path": "^3.1.0",
     "child_process": "*",
     "eslint": "^8.57.1",
