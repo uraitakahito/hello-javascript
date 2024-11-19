@@ -26,7 +26,14 @@ module.exports = {
       files: ["test/**", "test-jest/**"],
       // You can omit the eslint-plugin- prefix
       plugins: ["jest"],
-      rules: { "jest/prefer-expect-assertions": "off" },
+      rules: {
+        // https://eslint.org/docs/v8.x/rules/no-hooks
+        "jest/no-hooks": "off",
+        // https://github.com/jest-community/eslint-plugin-jest/blob/v28.9.0/docs/rules/prefer-importing-jest-globals.md
+        "jest/prefer-importing-jest-globals": "off",
+        // https://eslint.org/docs/v8.x/rules/no-magic-numbers
+        "no-magic-numbers": "off",
+      },
     },
   ],
 
@@ -36,6 +43,10 @@ module.exports = {
   },
 
   rules: {
+    // https://eslint.org/docs/v8.x/rules/capitalized-comments
+    "capitalized-comments": "off",
+    // https://eslint.org/docs/v8.x/rules/multiline-comment-style
+    "multiline-comment-style": "off",
     // https://eslint.org/docs/v8.x/rules/no-ternary
     "no-ternary": "off",
   },
