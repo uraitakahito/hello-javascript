@@ -6,6 +6,7 @@ module.exports = {
     browser: true,
     es2024: true,
     node: true,
+    "@vitest/env": true,
   },
 
   /*
@@ -39,6 +40,15 @@ module.exports = {
         // https://github.com/jest-community/eslint-plugin-jest/blob/v28.9.0/docs/rules/prefer-importing-jest-globals.md
         "jest/prefer-importing-jest-globals": "off",
       },
+    },
+    {
+      //
+      // https://github.com/vitest-dev/eslint-plugin-vitest
+      // https://stackoverflow.com/a/78859495
+      //
+      extends: ["plugin:@vitest/legacy-all"],
+      files: ["test/**", "test-vitest/**"],
+      plugins: ["@vitest"],
     },
   ],
 
