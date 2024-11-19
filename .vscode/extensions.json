@@ -12,8 +12,6 @@
 		//
 		// Others
 		//
-		// https://marketplace.visualstudio.com/items?itemName=biomejs.biome
-		"biomejs.biome",
 		// https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
 		"eamodio.gitlens",
 		// https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
