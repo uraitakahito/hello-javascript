@@ -59,6 +59,8 @@ module.exports = {
     "no-inline-comments": "off",
     // https://eslint.org/docs/v8.x/rules/no-ternary
     "no-ternary": "off",
+    // https://eslint.org/docs/v8.x/rules/one-var
+    "one-var": "off",
   },
 
   // https://github.com/jest-community/eslint-plugin-jest?tab=readme-ov-file#jest-version-setting
