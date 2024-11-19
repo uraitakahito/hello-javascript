@@ -45,6 +45,8 @@ module.exports = {
   rules: {
     // https://eslint.org/docs/v8.x/rules/capitalized-comments
     "capitalized-comments": "off",
+    // https://eslint.org/docs/v8.x/rules/id-length
+    "id-length": "off",
     // https://eslint.org/docs/v8.x/rules/multiline-comment-style
     "multiline-comment-style": "off",
     // https://eslint.org/docs/v8.x/rules/no-ternary
