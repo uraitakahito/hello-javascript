@@ -3,10 +3,10 @@ module.exports = {
    * https://github.com/eslint/eslintrc/blob/main/conf/environments.js
    */
   env: {
+    "@vitest/env": true,
     browser: true,
     es2024: true,
     node: true,
-    "@vitest/env": true,
   },
 
   /*
