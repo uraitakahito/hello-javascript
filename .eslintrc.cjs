@@ -18,6 +18,13 @@ module.exports = {
    */
   overrides: [
     {
+      files: ["test/**", "test-jest/**", "test-vitest/**"],
+      rules: {
+        // https://eslint.org/docs/v8.x/rules/no-magic-numbers
+        "no-magic-numbers": "off",
+      },
+    },
+    {
       /*
        * IMPORTANT: `all configuration` is not recommended for production use because it changes with every minor and major version of ESLint. Use it at your own risk.
        * https://eslint.org/docs/v8.x/use/configure/configuration-files#using-eslintall
@@ -31,8 +38,6 @@ module.exports = {
         "jest/no-hooks": "off",
         // https://github.com/jest-community/eslint-plugin-jest/blob/v28.9.0/docs/rules/prefer-importing-jest-globals.md
         "jest/prefer-importing-jest-globals": "off",
-        // https://eslint.org/docs/v8.x/rules/no-magic-numbers
-        "no-magic-numbers": "off",
       },
     },
   ],
