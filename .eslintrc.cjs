@@ -49,10 +49,14 @@ module.exports = {
     "func-style": "off",
     // https://eslint.org/docs/v8.x/rules/id-length
     "id-length": "off",
+    // https://eslint.org/docs/v8.x/rules/line-comment-position
+    "line-comment-position": "off",
     // https://eslint.org/docs/v8.x/rules/multiline-comment-style
     "multiline-comment-style": "off",
     // https://eslint.org/docs/v8.x/rules/no-console
     "no-console": "off",
+    // https://eslint.org/docs/v8.x/rules/no-inline-comments
+    "no-inline-comments": "off",
     // https://eslint.org/docs/v8.x/rules/no-ternary
     "no-ternary": "off",
   },
