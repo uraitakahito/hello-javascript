@@ -15,6 +15,7 @@
     "@vitest/coverage-v8": "*",
     "app-root-path": "^3.1.0",
     "child_process": "*",
+    "eslint": "^8.57.1",
     "jest": "^29.7.0",
     "jsdom": "^25.0.1",
     "path": "^0.12.7",
