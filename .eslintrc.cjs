@@ -92,4 +92,15 @@ module.exports = {
     // https://eslint.org/docs/v8.x/rules/one-var
     'one-var': 'off',
   },
+
+  //
+  // https://blog.kubosho.com/entries/eslint-plugin-import-error-on-vitest-configuration-file
+  //
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
+      },
+    },
+  },
 };
