@@ -92,11 +92,4 @@ module.exports = {
     // https://eslint.org/docs/v8.x/rules/one-var
     'one-var': 'off',
   },
-
-  // https://github.com/jest-community/eslint-plugin-jest?tab=readme-ov-file#jest-version-setting
-  settings: {
-    jest: {
-      version: require('jest/package.json').version,
-    },
-  },
 };
