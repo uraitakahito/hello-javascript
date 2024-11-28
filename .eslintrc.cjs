@@ -1,3 +1,8 @@
+// > Use eslint v8 until such time as our configs support v9.
+// https://github.com/airbnb/javascript/issues/2961
+// Backwards compatibility utility is available
+// https://eslint.org/blog/2022/08/new-config-system-part-2/#backwards-compatibility-utility
+
 module.exports = {
   /*
    * https://github.com/eslint/eslintrc/blob/main/conf/environments.js
@@ -12,7 +17,15 @@ module.exports = {
   /*
    * https://eslint.org/docs/v8.x/use/configure/configuration-files#extending-configuration-files
    */
-  extends: "eslint:all",
+  extends: [
+    "eslint:all",
+    // airbnb includes React
+    // https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb/index.js
+    // airbnb-base does not include React
+    // https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb-base/index.js
+    "airbnb-base",
+    // 'airbnb',
+  ],
 
   /*
    * https://github.com/jest-community/eslint-plugin-jest
