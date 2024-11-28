@@ -2,16 +2,16 @@
 // https://vitest.dev/guide/#configuring-vitest
 
 // https://vitest.dev/guide/workspace
-import { defineWorkspace } from 'vitest/config';
+import { defineWorkspace } from "vitest/config";
 
 // defineWorkspace provides a nice type hinting DX
 export default defineWorkspace([
   {
     test: {
+      environment: "node",
       globals: true,
-      name: 'node',
-      include: ['{test,test-vitest}/**/*.test.{ts,js}'],
-      environment: 'node',
+      include: ["{test,test-vitest}/**/*.test.{ts,js}"],
+      name: "node",
       // setupFiles: ['./setup.init.js'],
     },
   },

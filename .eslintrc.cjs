@@ -21,6 +21,7 @@ module.exports = {
     {
       files: ["test/**", "test-jest/**", "test-vitest/**"],
       rules: {
+        // Magic numbers are frequently used in tests, so disable this rule
         // https://eslint.org/docs/v8.x/rules/no-magic-numbers
         "no-magic-numbers": "off",
       },
