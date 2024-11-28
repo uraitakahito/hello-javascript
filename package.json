@@ -16,7 +16,7 @@
     "@vitest/eslint-plugin": "^1.1.12",
     "app-root-path": "^3.1.0",
     "child_process": "*",
-    "eslint": "^8.57.1",
+    "eslint": "^9.0.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jest": "^28.9.0",
