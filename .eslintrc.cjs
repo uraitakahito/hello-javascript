@@ -8,7 +8,6 @@ module.exports = {
    * https://github.com/eslint/eslintrc/blob/main/conf/environments.js
    */
   env: {
-    '@jest/globals': true,
     '@vitest/env': true,
     browser: true,
     es2024: true,
