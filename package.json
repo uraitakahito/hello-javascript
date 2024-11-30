@@ -12,6 +12,7 @@
     "rmdir": "node -e \"var fs = require('fs'); try{process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true }))}catch(err){console.log(err)}; process.exit(0);\""
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@vitest/coverage-v8": "*",
     "@vitest/eslint-plugin": "^1.1.12",
     "app-root-path": "^3.1.0",

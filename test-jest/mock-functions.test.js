@@ -1,8 +1,8 @@
-import { forEach } from "../src/forEach.js";
-import { jest } from "@jest/globals";
+import { jest } from '@jest/globals';
+import { forEach } from '../src/forEach.js';
 
-describe("mock functions", () => {
-  it("forEach mock function", () => {
+describe('mock functions', () => {
+  it('forEach mock function', () => {
     expect.assertions(4);
 
     const mockCallback = jest.fn((x) => 42 + x);
