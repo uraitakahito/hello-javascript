@@ -71,6 +71,8 @@ module.exports = {
 
   parserOptions: {
     // https://eslint.org/docs/v8.x/use/configure/language-options#specifying-parser-options
+    ecmaVersion: 2024,
+    // https://eslint.org/docs/v8.x/use/configure/language-options#specifying-parser-options
     sourceType: 'module',
   },
 
