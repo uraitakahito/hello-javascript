@@ -1,6 +1,11 @@
 {
   "recommendations": [
     //
+    // JSON
+    //
+    // https://marketplace.visualstudio.com/items?itemName=remcohaszing.schemastore
+    "remcohaszing.schemastore",
+    //
     // JavaScript
     //
     // https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest
