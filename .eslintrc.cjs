@@ -90,6 +90,9 @@ module.exports = {
     'no-console': 'off',
     // https://eslint.org/docs/v8.x/rules/no-inline-comments
     'no-inline-comments': 'off',
+    // https://eslint.org/docs/latest/rules/no-param-reassign
+    // https://github.com/airbnb/javascript/issues/1217
+    'no-param-reassign': ['error', { props: true, ignorePropertyModificationsForRegex: ['^element'] }],
     // https://eslint.org/docs/v8.x/rules/no-ternary
     'no-ternary': 'off',
     // https://eslint.org/docs/latest/rules/no-underscore-dangle
