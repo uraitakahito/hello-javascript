@@ -26,9 +26,6 @@ module.exports = {
     // 'airbnb',
   ],
 
-  /*
-   * https://github.com/jest-community/eslint-plugin-jest
-   */
   overrides: [
     {
       files: ['test/**', 'test-jest/**', 'test-vitest/**'],
