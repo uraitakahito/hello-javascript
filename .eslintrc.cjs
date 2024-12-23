@@ -66,6 +66,12 @@ module.exports = {
       files: ['test/**', 'test-vitest/**'],
       plugins: ['@vitest'],
     },
+    {
+      files: ['jest.config.mjs'],
+      rules: {
+        'max-len': 'off',
+      },
+    },
   ],
 
   parserOptions: {
