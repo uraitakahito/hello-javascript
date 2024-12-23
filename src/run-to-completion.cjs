@@ -10,17 +10,17 @@ function delay() {
 
 function bar() {
   delay();
-  console.log("bar!"); // (2)
+  console.log('bar!'); // (2)
 }
 
 function foo() {
   delay();
   bar();
-  console.log("foo!"); // (3)
+  console.log('foo!'); // (3)
 }
 
 function baz() {
-  console.log("baz!"); // (4)
+  console.log('baz!'); // (4)
 }
 
 setTimeout(baz, 10); // (1)
