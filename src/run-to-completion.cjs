@@ -25,3 +25,6 @@ function baz() {
 
 setTimeout(baz, 10); // (1)
 foo();
+// bar!
+// foo!
+// baz!
