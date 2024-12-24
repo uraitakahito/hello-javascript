@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import { forEach } from '../src/forEach';
+import forEach from '../src/forEach';
 
 describe('mock functions', () => {
   it('forEach mock function', () => {
