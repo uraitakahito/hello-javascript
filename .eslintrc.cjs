@@ -98,6 +98,8 @@ module.exports = {
     'func-style': 'off',
     // https://eslint.org/docs/v8.x/rules/id-length
     'id-length': 'off',
+    // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md
+    'import/no-extraneous-dependencies': ['error', { devDependencies: ['rollup.*.js'], peerDependencies: false }],
     // https://eslint.org/docs/v8.x/rules/line-comment-position
     'line-comment-position': 'off',
     // https://eslint.org/docs/v8.x/rules/multiline-comment-style
