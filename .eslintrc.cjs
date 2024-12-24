@@ -34,6 +34,8 @@ module.exports = {
     // 'airbnb',
   ],
 
+  ignorePatterns: ['dist/'],
+
   overrides: [
     {
       files: ['test/**', 'test-jest/**', 'test-vitest/**'],
