@@ -101,7 +101,7 @@ module.exports = {
     // https://github.com/import-js/eslint-plugin-import/blob/v2.17.2/docs/rules/extensions.md
     'import/extensions': ['error', 'always', { ignorePackages: true }],
     // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md
-    'import/no-extraneous-dependencies': ['error', { devDependencies: ['rollup.*.js'], peerDependencies: false }],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: ['test-jest/*.js', 'rollup.*.js'], peerDependencies: false }],
     // https://eslint.org/docs/v8.x/rules/line-comment-position
     'line-comment-position': 'off',
     // https://eslint.org/docs/v8.x/rules/multiline-comment-style
