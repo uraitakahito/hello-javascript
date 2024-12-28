@@ -31,6 +31,6 @@
     "winston": "^3.17.0"
   },
   "dependencies": {
-    "@uraitakahito/hello-commonjs": "^1.0.4"
+    "@uraitakahito/hello-commonjs": "^1.0.5"
   }
 }
