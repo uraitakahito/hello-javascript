@@ -108,6 +108,13 @@ module.exports = {
     //
     'import/extensions': ['error', 'always', { ignorePackages: true }],
 
+    //
+    // https://engineering.linecorp.com/ja/blog/you-dont-need-default-export
+    // https://zenn.dev/odiak/articles/9aa48e892e8141
+    // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-anonymous-default-export.md
+    //
+    'import/no-anonymous-default-export': ['error', { allowCallExpression: false }],
+
     // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['test-jest/*.js', 'rollup.*.js'], peerDependencies: false }],
     // https://eslint.org/docs/v8.x/rules/line-comment-position
