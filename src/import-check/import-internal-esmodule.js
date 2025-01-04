@@ -15,7 +15,11 @@ import * as namespaceObject1 from './named-exports-no-default.esm.js';
 //
 // Named import with `default export`:
 //
-// Good:
+//   ALERT:
+//     DO NOT USE default export
+//     https://engineering.linecorp.com/ja/blog/you-dont-need-default-export
+//
+// Not bad:
 import { named3 } from './named-exports-with-default.esm.js';
 import * as namespaceObject2 from './named-exports-with-default.esm.js';
 import defaultExport2 from './named-exports-with-default.esm.js';
