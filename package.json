@@ -5,16 +5,11 @@
   "private": true,
   "license": "Apache-2.0",
   "scripts": {
-    "coverage": "npx vitest run --coverage",
-    "test": "npm run test:jest:run; npm run test:vitest:run",
-    "test:jest:run": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest",
-    "test:vitest:run": "npx vitest run",
+    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest",
     "rmdir": "node -e \"var fs = require('fs'); try{process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true }))}catch(err){console.log(err)}; process.exit(0);\""
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@vitest/coverage-v8": "*",
-    "@vitest/eslint-plugin": "^1.1.12",
     "app-root-path": "^3.1.0",
     "child_process": "*",
     "eslint": "^8.57.1",
@@ -27,7 +22,6 @@
     "path": "^0.12.7",
     "redis": "^4.7.0",
     "supertest": "*",
-    "vitest": "*",
     "winston": "^3.17.0"
   },
   "dependencies": {

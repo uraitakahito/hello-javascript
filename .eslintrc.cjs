@@ -40,7 +40,7 @@ module.exports = {
 
   overrides: [
     {
-      files: ['test/**', 'test-jest/**', 'test-vitest/**'],
+      files: ['test/**', 'test-jest/**'],
       rules: {
         // Magic numbers are frequently used in tests, so disable this rule
         // https://eslint.org/docs/v8.x/rules/no-magic-numbers
@@ -65,18 +65,6 @@ module.exports = {
         // https://github.com/jest-community/eslint-plugin-jest/blob/v28.9.0/docs/rules/require-hook.md
         'jest/require-hook': 'off',
       },
-    },
-    {
-      env: {
-        '@vitest/env': true,
-      },
-      //
-      // https://github.com/vitest-dev/eslint-plugin-vitest
-      // https://stackoverflow.com/a/78859495
-      //
-      extends: ['plugin:@vitest/legacy-all'],
-      files: ['test/**', 'test-vitest/**'],
-      plugins: ['@vitest'],
     },
     {
       files: ['jest.config.mjs'],
@@ -134,16 +122,5 @@ module.exports = {
     'no-underscore-dangle': ['error', { allow: ['__dirname'] }],
     // https://eslint.org/docs/v8.x/rules/one-var
     'one-var': 'off',
-  },
-
-  //
-  // https://blog.kubosho.com/entries/eslint-plugin-import-error-on-vitest-configuration-file
-  //
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
-      },
-    },
   },
 };

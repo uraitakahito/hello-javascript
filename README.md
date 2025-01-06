@@ -16,8 +16,6 @@ Run any commands inside the Docker containers as needed:
 npm ci
 npm run test:jest:run
 npx eslint .
-npx vitest run
-npx vitest run --project node
 ```
 
 ## How to run the app in docker
