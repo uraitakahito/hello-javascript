@@ -14,7 +14,6 @@ Run any commands inside the Docker containers as needed:
 
 ```sh
 npm ci
-npm run test:jest:run
 npx eslint .
 ```
 

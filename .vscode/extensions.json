@@ -11,11 +11,6 @@
     // https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
     "redhat.vscode-yaml",
     //
-    // JavaScript
-    //
-    // https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest
-    "Orta.vscode-jest",
-    //
     // Others
     //
     // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
