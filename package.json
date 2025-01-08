@@ -24,7 +24,6 @@
     "npm-check-updates": "^17.1.11",
     "path": "^0.12.7",
     "redis": "^4.7.0",
-    "supertest": "*",
     "winston": "^3.17.0"
   },
   "dependencies": {
