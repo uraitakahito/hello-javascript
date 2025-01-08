@@ -1,9 +1,16 @@
 {
+  "//": [
+    "Discussion on how to write comments in package.json:",
+    "https://stackoverflow.com/questions/14221579/how-do-i-add-comments-to-package-json-for-npm-install"
+  ],
   "name": "hello-javascript",
   "version": "1.0.0",
   "type": "module",
   "private": true,
   "license": "Apache-2.0",
+  "//scripts": {
+    "rmdir": "Clean the targetDir: `npm run rmdir targetDir`"
+  },
   "scripts": {
     "rmdir": "node -e \"var fs = require('fs'); try{process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true }))}catch(err){console.log(err)}; process.exit(0);\""
   },
