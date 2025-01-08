@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@uraitakahito/hello-commonjs": "^1.0.5",
+    "@uraitakahito/hello-conditional-exports": "^1.0.0",
     "@uraitakahito/hello-esmodule": "^1.0.1"
   }
 }
