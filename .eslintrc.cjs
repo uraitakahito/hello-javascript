@@ -89,8 +89,6 @@ module.exports = {
     'line-comment-position': 'off',
     // https://eslint.org/docs/v8.x/rules/multiline-comment-style
     'multiline-comment-style': 'off',
-    // https://eslint.org/docs/v8.x/rules/no-console
-    'no-console': 'off',
     // https://eslint.org/docs/v8.x/rules/no-inline-comments
     'no-inline-comments': 'off',
     // https://eslint.org/docs/v8.x/rules/no-magic-numbers
