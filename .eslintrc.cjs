@@ -93,6 +93,17 @@ module.exports = {
     'no-console': 'off',
     // https://eslint.org/docs/v8.x/rules/no-inline-comments
     'no-inline-comments': 'off',
+    // https://eslint.org/docs/v8.x/rules/no-magic-numbers
+    'no-magic-numbers': [
+      'error', {
+        detectObjects: false,
+        enforceConst: true,
+        ignore: [1],
+        ignoreArrayIndexes: true,
+        ignoreClassFieldInitialValues: true,
+      },
+    ],
+    // 'no-magic-numbers': 'error',
     // https://eslint.org/docs/latest/rules/no-param-reassign
     // https://github.com/airbnb/javascript/issues/1217
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsForRegex: ['^element'] }],

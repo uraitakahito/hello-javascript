@@ -1,4 +1,6 @@
 /* eslint-disable no-magic-numbers */
+/* eslint-disable no-console */
+/* eslint-disable strict */
 
 // https://meetup-jp.nhncloud.com/896
 
