@@ -1,4 +1,6 @@
 /* eslint-disable import/no-duplicates */
+/* eslint-disable no-console */
+/* eslint-disable no-duplicate-imports */
 /* eslint-disable sort-imports */
 
 // When importing ES modules without using a bundler or transpiler, file extensions are required:
