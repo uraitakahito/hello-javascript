@@ -59,8 +59,13 @@ module.exports = {
   rules: {
     // https://eslint.org/docs/v8.x/rules/capitalized-comments
     'capitalized-comments': 'off',
+
+    //
     // https://eslint.org/docs/v8.x/rules/func-style
-    'func-style': 'off',
+    // https://github.com/airbnb/javascript?tab=readme-ov-file#functions--declarations
+    //
+    'func-style': ['error', 'expression'],
+
     // https://eslint.org/docs/v8.x/rules/id-length
     'id-length': 'off',
 
