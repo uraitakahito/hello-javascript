@@ -59,8 +59,13 @@ module.exports = {
   rules: {
     // https://eslint.org/docs/v8.x/rules/capitalized-comments
     'capitalized-comments': 'off',
+
+    //
     // https://eslint.org/docs/v8.x/rules/func-style
-    'func-style': 'off',
+    // https://github.com/airbnb/javascript?tab=readme-ov-file#functions--declarations
+    //
+    'func-style': ['error', 'expression'],
+
     // https://eslint.org/docs/v8.x/rules/id-length
     'id-length': 'off',
 
@@ -84,18 +89,50 @@ module.exports = {
     'line-comment-position': 'off',
     // https://eslint.org/docs/v8.x/rules/multiline-comment-style
     'multiline-comment-style': 'off',
-    // https://eslint.org/docs/v8.x/rules/no-console
-    'no-console': 'off',
     // https://eslint.org/docs/v8.x/rules/no-inline-comments
     'no-inline-comments': 'off',
+    // https://eslint.org/docs/v8.x/rules/no-magic-numbers
+    'no-magic-numbers': [
+      'error', {
+        detectObjects: false,
+        enforceConst: true,
+        ignore: [1],
+        ignoreArrayIndexes: true,
+        ignoreClassFieldInitialValues: true,
+      },
+    ],
+    // 'no-magic-numbers': 'error',
     // https://eslint.org/docs/latest/rules/no-param-reassign
     // https://github.com/airbnb/javascript/issues/1217
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsForRegex: ['^element'] }],
+
+    //
+    // https://eslint.org/docs/v8.x/rules/no-restricted-syntax
+    // https://zenn.dev/pirosikick/articles/f57c573282b3d8
+    //
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'ForInStatement',
+        message: 'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.',
+      },
+      {
+        selector: 'LabeledStatement',
+        message: 'Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.',
+      },
+      {
+        selector: 'WithStatement',
+        message: '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
+      },
+    ],
+
     // https://eslint.org/docs/v8.x/rules/no-ternary
     'no-ternary': 'off',
     // https://eslint.org/docs/latest/rules/no-underscore-dangle
     'no-underscore-dangle': ['error', { allow: ['__dirname'] }],
     // https://eslint.org/docs/v8.x/rules/one-var
     'one-var': 'off',
+    // https://eslint.org/docs/v8.x/rules/sort-imports
+    'sort-imports': 'error',
   },
 };

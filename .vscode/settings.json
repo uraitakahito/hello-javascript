@@ -14,10 +14,16 @@
   // JSON/JSONC
   //
   "[json]": {
-    "editor.formatOnSave": false
+    "editor.detectIndentation": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false
   },
   "[jsonc]": {
-    "editor.formatOnSave": false
+    "editor.detectIndentation": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false
   },
 
   //
@@ -35,5 +41,5 @@
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true
-  },
+  }
 }
