@@ -105,6 +105,27 @@ module.exports = {
     // https://eslint.org/docs/latest/rules/no-param-reassign
     // https://github.com/airbnb/javascript/issues/1217
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsForRegex: ['^element'] }],
+
+    //
+    // https://eslint.org/docs/v8.x/rules/no-restricted-syntax
+    // https://zenn.dev/pirosikick/articles/f57c573282b3d8
+    //
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'ForInStatement',
+        message: 'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.',
+      },
+      {
+        selector: 'LabeledStatement',
+        message: 'Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.',
+      },
+      {
+        selector: 'WithStatement',
+        message: '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
+      },
+    ],
+
     // https://eslint.org/docs/v8.x/rules/no-ternary
     'no-ternary': 'off',
     // https://eslint.org/docs/latest/rules/no-underscore-dangle
