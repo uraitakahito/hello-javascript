@@ -23,8 +23,7 @@
     "markuplint": "^4.11.4",
     "npm-check-updates": "^17.1.11",
     "path": "^0.12.7",
-    "redis": "^4.7.0",
-    "winston": "^3.17.0"
+    "redis": "^4.7.0"
   },
   "dependencies": {
     "@uraitakahito/hello-commonjs": "^1.0.5",
