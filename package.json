@@ -15,14 +15,11 @@
     "rmdir": "node -e \"var fs = require('fs'); try{process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true }))}catch(err){console.log(err)}; process.exit(0);\""
   },
   "devDependencies": {
-    "app-root-path": "^3.1.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.31.0",
     "markuplint": "^4.11.4",
-    "npm-check-updates": "^17.1.11",
-    "path": "^0.12.7",
-    "redis": "^4.7.0"
+    "npm-check-updates": "^17.1.11"
   },
   "dependencies": {
     "@uraitakahito/hello-commonjs": "^1.0.5",
