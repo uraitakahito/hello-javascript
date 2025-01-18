@@ -9,9 +9,10 @@
   "private": true,
   "license": "Apache-2.0",
   "//scripts": {
-    "rmdir": "Clean the targetDir: `npm run rmdir targetDir`"
+    "rmdir": "This command recursively deletes a folder even in environments where the rm command is not available."
   },
   "scripts": {
+    "clean": "npm run rmdir node_modules",
     "rmdir": "node -e \"var fs = require('fs'); try{process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true }))}catch(err){console.log(err)}; process.exit(0);\""
   },
   "devDependencies": {
