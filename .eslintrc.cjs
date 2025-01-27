@@ -40,7 +40,7 @@ module.exports = {
 
   overrides: [
     {
-      files: ['test/**'],
+      files: ['test/**', 'src/__tests__/*.test.js'],
       rules: {
         // Magic numbers are frequently used in tests, so disable this rule
         // https://eslint.org/docs/v8.x/rules/no-magic-numbers
