@@ -107,7 +107,6 @@ module.exports = {
         ignoreClassFieldInitialValues: true,
       },
     ],
-    // 'no-magic-numbers': 'error',
     // https://eslint.org/docs/latest/rules/no-param-reassign
     // https://github.com/airbnb/javascript/issues/1217
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsForRegex: ['^element'] }],
