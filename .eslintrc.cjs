@@ -138,6 +138,23 @@ module.exports = {
     // https://eslint.org/docs/v8.x/rules/one-var
     'one-var': 'off',
     // https://eslint.org/docs/v8.x/rules/sort-imports
-    'sort-imports': 'error',
+    'sort-imports': [
+      'error',
+      {
+        ignoreCase: false,
+
+        //
+        // Enabling all sort-imports rules can sometimes cause a deadlock
+        // e.g.
+        // https://github.com/uraitakahito/hello-javascript-jest/blob/2ecf6806d8289a884e4c2241fa2e4544039b27c8/src/__tests__/forEach.test.js#L1-L2
+        //
+        ignoreDeclarationSort: true,
+
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+        allowSeparatedGroups: false,
+      },
+    ],
+
   },
 };
