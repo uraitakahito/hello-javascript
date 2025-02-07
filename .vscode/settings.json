@@ -11,6 +11,12 @@
   "editor.wordWrap": "on",
 
   //
+  // Copilot Next Edit Suggestions (Preview)
+  // https://code.visualstudio.com/updates/v1_97#_copilot-next-edit-suggestions-preview
+  //
+  "github.copilot.nextEditSuggestions.enabled": true,
+
+  //
   // JSON/JSONC
   //
   "[json]": {
@@ -41,5 +47,5 @@
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true
-  }
+  },
 }
