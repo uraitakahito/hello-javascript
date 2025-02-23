@@ -5,13 +5,15 @@
     //
     // https://marketplace.visualstudio.com/items?itemName=remcohaszing.schemastore
     "remcohaszing.schemastore",
+
     //
     // YAML
     //
     // https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
     "redhat.vscode-yaml",
+
     //
-    // Others
+    // Git & GitHub
     //
     // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
     "eamodio.gitlens",
@@ -19,6 +21,12 @@
     "GitHub.copilot",
     // https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
     "GitHub.vscode-github-actions",
+
+    //
+    // Others
+    //
+    // https://marketplace.visualstudio.com/items?itemName=dbankier.vscode-quick-select
+    "dbankier.vscode-quick-select",
     // https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck
     "timonwong.shellcheck",
     // https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
