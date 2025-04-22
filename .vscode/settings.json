@@ -4,48 +4,48 @@
 //   macOS $HOME/Library/Application\ Support/Code/User/settings.json
 //   Linux $HOME/.config/Code/User/settings.json
 {
-  //
-  // Basic Editing
-  //
-  // https://code.visualstudio.com/docs/editor/codebasics#_how-do-i-turn-on-word-wrap
-  "editor.wordWrap": "on",
+    //
+    // Basic Editing
+    //
+    // https://code.visualstudio.com/docs/editor/codebasics#_how-do-i-turn-on-word-wrap
+    "editor.wordWrap": "on",
 
-  //
-  // Copilot Next Edit Suggestions (Preview)
-  // https://code.visualstudio.com/updates/v1_97#_copilot-next-edit-suggestions-preview
-  //
-  "github.copilot.nextEditSuggestions.enabled": true,
+    //
+    // Copilot Next Edit Suggestions (Preview)
+    // https://code.visualstudio.com/updates/v1_97#_copilot-next-edit-suggestions-preview
+    //
+    "github.copilot.nextEditSuggestions.enabled": true,
 
-  //
-  // JSON/JSONC
-  //
-  "[json]": {
-    "editor.detectIndentation": true,
-    "editor.formatOnPaste": false,
-    "editor.formatOnSave": false,
-    "editor.formatOnType": false
-  },
-  "[jsonc]": {
-    "editor.detectIndentation": true,
-    "editor.formatOnPaste": false,
-    "editor.formatOnSave": false,
-    "editor.formatOnType": false
-  },
+    //
+    // JSON/JSONC
+    //
+    "[json]": {
+        "editor.detectIndentation": true,
+        "editor.formatOnPaste": false,
+        "editor.formatOnSave": false,
+        "editor.formatOnType": false
+    },
+    "[jsonc]": {
+        "editor.detectIndentation": true,
+        "editor.formatOnPaste": false,
+        "editor.formatOnSave": false,
+        "editor.formatOnType": false
+    },
 
-  //
-  // ESLint
-  //
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
-  // https://stackoverflow.com/a/71884347
-  "eslint.format.enable": true,
+    //
+    // ESLint
+    //
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    // https://stackoverflow.com/a/71884347
+    "eslint.format.enable": true,
 
-  "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "editor.formatOnSave": true
-  },
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.formatOnSave": true
+    },
 }
