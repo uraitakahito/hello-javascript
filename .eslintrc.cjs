@@ -40,7 +40,7 @@ module.exports = {
 
   overrides: [
     {
-      files: ['test/**'],
+      files: ['test/**', 'src/__tests__/*.test.js'],
       rules: {
         // Magic numbers are frequently used in tests, so disable this rule
         // https://eslint.org/docs/v8.x/rules/no-magic-numbers
@@ -84,7 +84,13 @@ module.exports = {
     'import/no-anonymous-default-export': ['error', { allowCallExpression: false }],
 
     // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md
-    'import/no-extraneous-dependencies': ['error', { devDependencies: ['test/*.js', 'rollup.*.js'], peerDependencies: false }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['test/*.js', 'src/__tests__/*.test.js', 'rollup.*.js'],
+        peerDependencies: false,
+      },
+    ],
     // https://eslint.org/docs/v8.x/rules/line-comment-position
     'line-comment-position': 'off',
     // https://eslint.org/docs/v8.x/rules/multiline-comment-style
@@ -101,7 +107,6 @@ module.exports = {
         ignoreClassFieldInitialValues: true,
       },
     ],
-    // 'no-magic-numbers': 'error',
     // https://eslint.org/docs/latest/rules/no-param-reassign
     // https://github.com/airbnb/javascript/issues/1217
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsForRegex: ['^element'] }],
@@ -133,6 +138,23 @@ module.exports = {
     // https://eslint.org/docs/v8.x/rules/one-var
     'one-var': 'off',
     // https://eslint.org/docs/v8.x/rules/sort-imports
-    'sort-imports': 'error',
+    'sort-imports': [
+      'error',
+      {
+        ignoreCase: false,
+
+        //
+        // Enabling all sort-imports rules can sometimes cause a deadlock
+        // e.g.
+        // https://github.com/uraitakahito/hello-javascript-jest/blob/2ecf6806d8289a884e4c2241fa2e4544039b27c8/src/__tests__/forEach.test.js#L1-L2
+        //
+        ignoreDeclarationSort: true,
+
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+        allowSeparatedGroups: false,
+      },
+    ],
+
   },
 };
