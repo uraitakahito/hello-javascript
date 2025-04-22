@@ -1,18 +1,6 @@
 {
     "recommendations": [
         //
-        // JSON
-        //
-        // https://marketplace.visualstudio.com/items?itemName=remcohaszing.schemastore
-        "remcohaszing.schemastore",
-
-        //
-        // YAML
-        //
-        // https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
-        "redhat.vscode-yaml",
-
-        //
         // Git & GitHub
         //
         // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
@@ -21,6 +9,26 @@
         "GitHub.copilot",
         // https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
         "GitHub.vscode-github-actions",
+
+        //
+        // JSON
+        //
+        // https://marketplace.visualstudio.com/items?itemName=remcohaszing.schemastore
+        "remcohaszing.schemastore",
+
+        //
+        // Mermaid
+        //
+        // https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid
+        "bierner.markdown-mermaid",
+        // https://marketplace.visualstudio.com/items?itemName=bpruitt-goddard.mermaid-markdown-syntax-highlighting
+        "bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+
+        //
+        // YAML
+        //
+        // https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
+        "redhat.vscode-yaml",
 
         //
         // Others
