@@ -19,11 +19,11 @@
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.31.0",
-    "npm-check-updates": "^17.1.11"
+    "npm-check-updates": "^18.0.1"
   },
   "dependencies": {
-    "@uraitakahito/hello-commonjs": "^1.0.5",
-    "@uraitakahito/hello-conditional-exports": "^1.0.0",
-    "@uraitakahito/hello-esmodule": "^1.0.1"
+    "@uraitakahito/hello-commonjs": "^1.0.8",
+    "@uraitakahito/hello-conditional-exports": "^1.0.1",
+    "@uraitakahito/hello-esmodule": "^1.0.2"
   }
 }
