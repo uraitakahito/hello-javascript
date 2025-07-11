@@ -7,7 +7,9 @@ ARG group_id
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG features_repository="https://github.com/uraitakahito/features.git"
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
-ARG node_version="22.9.0"
+# Refer to the following URL for Node.js versions:
+#   https://nodejs.org/en/about/previous-releases
+ARG node_version="24.4.0"
 
 #
 # Git
