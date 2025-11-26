@@ -49,6 +49,10 @@
 #
 #   sudo chown -R $(id -u):$(id -g) /zsh-volume
 #
+# ## Launch Claude
+#
+#   claude --dangerously-skip-permissions
+#
 # ## Connect from Visual Studio Code
 #
 # 1. Open **Command Palette (Shift + Command + p)**
