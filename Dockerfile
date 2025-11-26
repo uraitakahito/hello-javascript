@@ -1,5 +1,5 @@
-# Debian 12.11
-FROM debian:bookworm-20250630
+# Debian 12.12
+FROM debian:bookworm-20251117
 
 ARG user_name=developer
 ARG user_id
