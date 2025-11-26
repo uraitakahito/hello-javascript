@@ -31,6 +31,12 @@
         "redhat.vscode-yaml",
 
         //
+        // Linter & Formatter
+        //
+        // https://marketplace.visualstudio.com/items?itemName=biomejs.biome
+        "biomejs.biome",
+
+        //
         // Others
         //
         // https://marketplace.visualstudio.com/items?itemName=dbankier.vscode-quick-select
