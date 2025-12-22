@@ -66,12 +66,11 @@
 #
 # ```sh
 # npm ci
-# npx eslint .
 # ```
 #
 
 # Debian 12.12
-FROM debian:bookworm-20251117
+FROM debian:bookworm-20251208
 
 ARG user_name=developer
 ARG user_id
@@ -81,7 +80,7 @@ ARG features_repository="https://github.com/uraitakahito/features.git"
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
 # Refer to the following URL for Node.js versions:
 #   https://nodejs.org/en/about/previous-releases
-ARG node_version="24.4.0"
+ARG node_version="24.12.0"
 
 #
 # Git
@@ -142,16 +141,15 @@ RUN cd /home/${user_name} && \
   dotfiles/install.sh
 
 #
-# Claude Code
+# Timezone
 #
-# Discussion about using nvm during Docker container build:
-#   https://stackoverflow.com/questions/25899912/how-to-install-nvm-in-docker
 ARG TZ
 ENV TZ="$TZ"
-ENV NVM_DIR=/usr/local/share/nvm
-RUN bash -c "source $NVM_DIR/nvm.sh && \
-             nvm use ${node_version} && \
-             npm install -g @anthropic-ai/claude-code"
+
+#
+# Claude Code
+#
+RUN curl -fsSL https://claude.ai/install.sh | bash
 
 # express server
 EXPOSE 3000
