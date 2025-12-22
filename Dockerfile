@@ -66,7 +66,6 @@
 #
 # ```sh
 # npm ci
-# npx eslint .
 # ```
 #
 
