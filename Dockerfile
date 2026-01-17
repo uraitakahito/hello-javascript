@@ -91,10 +91,6 @@ RUN cd /usr/src && \
 #
 # Add user and install common utils.
 #
-# usermod -aG root: Add user to root group to access SSH Agent socket
-# (/run/host-services/ssh-auth.sock) which is owned by root:root.
-# This enables SSH Agent forwarding for git operations over SSH.
-#
 RUN USERNAME=${user_name} \
     USERUID=${user_id} \
     USERGID=${group_id} \
