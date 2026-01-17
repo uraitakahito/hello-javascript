@@ -6,16 +6,6 @@
 #
 # ## Preparation
 #
-# ### SSH Agent
-#
-# Uses ssh-agent. After a restart, if you have not yet initiated an SSH login from your Mac, run the following command on the Mac.
-#
-#   ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-#
-# For more details about ssh-agent, see:
-#
-#   https://github.com/uraitakahito/hello-docker/blob/c942ab43712dde4e69c66654eac52d559b41cc49/README.md
-#
 # ### Download the files required to build the Docker container
 #
 #   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/heads/main/Dockerfile
@@ -110,8 +100,11 @@ RUN USERNAME=${user_name} \
     USERGID=${group_id} \
     CONFIGUREZSHASDEFAULTSHELL=true \
     UPGRADEPACKAGES=false \
-      /usr/src/features/src/common-utils/install.sh && \
-    usermod -aG root ${user_name}
+    # When using ssh-agent inside Docker, add the user to the root group
+    # to ensure permission to access the mounted socket.
+    #   https://github.com/uraitakahito/features/blob/59e8acea74ff0accd5c2c6f98ede1191a9e3b2aa/src/common-utils/main.sh#L467-L471
+    ADDUSERTOROOTGROUP=true \
+      /usr/src/features/src/common-utils/install.sh
 
 #
 # Install extra utils.
