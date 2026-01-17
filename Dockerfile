@@ -69,8 +69,8 @@
 # ```
 #
 
-# Debian 12.12
-FROM debian:bookworm-20251208
+# Debian 12.13
+FROM debian:bookworm-20260112
 
 ARG user_name=developer
 ARG user_id
@@ -101,12 +101,17 @@ RUN cd /usr/src && \
 #
 # Add user and install common utils.
 #
+# usermod -aG root: Add user to root group to access SSH Agent socket
+# (/run/host-services/ssh-auth.sock) which is owned by root:root.
+# This enables SSH Agent forwarding for git operations over SSH.
+#
 RUN USERNAME=${user_name} \
     USERUID=${user_id} \
     USERGID=${group_id} \
     CONFIGUREZSHASDEFAULTSHELL=true \
     UPGRADEPACKAGES=false \
-      /usr/src/features/src/common-utils/install.sh
+      /usr/src/features/src/common-utils/install.sh && \
+    usermod -aG root ${user_name}
 
 #
 # Install extra utils.
