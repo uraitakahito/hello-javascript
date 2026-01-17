@@ -6,16 +6,6 @@
 #
 # ## Preparation
 #
-# ### SSH Agent
-#
-# Uses ssh-agent. After a restart, if you have not yet initiated an SSH login from your Mac, run the following command on the Mac.
-#
-#   ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-#
-# For more details about ssh-agent, see:
-#
-#   https://github.com/uraitakahito/hello-docker/blob/c942ab43712dde4e69c66654eac52d559b41cc49/README.md
-#
 # ### Download the files required to build the Docker container
 #
 #   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/heads/main/Dockerfile
