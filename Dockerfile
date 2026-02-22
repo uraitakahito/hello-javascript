@@ -1,22 +1,16 @@
-# ## Features of this Dockerfile
+# Features of this Dockerfile
 #
 # - Not based on devcontainer; use by attaching VSCode to the container
-#   - https://code.visualstudio.com/docs/devcontainers/attach-container
+# - Claude Code is pre-installed
+# - Includes dotfiles and extra utilities
 # - Assumes host OS is Mac
-#
-# ## Preparation
-#
-# ### Download the files required to build the Docker container
-#
-#   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/heads/main/Dockerfile
-#   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/heads/main/docker-entrypoint.sh
-#   chmod 755 docker-entrypoint.sh
-#
-# ## From Docker build to login
+# - Passes the GH_TOKEN environment variable into the container
 #
 # Build the Docker image:
 #
-#   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g` --build-arg TZ=Asia/Tokyo
+#   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+#
+# (First time only) Create a volume for command history:
 #
 # Create a volume to persist the command history executed inside the Docker container.
 # It is stored in the volume because the dotfiles configuration redirects the shell history there.
@@ -26,24 +20,13 @@
 #
 # Start the Docker container(/run/host-services/ssh-auth.sock is a virtual socket provided by Docker Desktop for Mac.):
 #
-#   docker container run -d --rm --init -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
+#   docker container run -d --rm --init -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock -e GH_TOKEN=$(gh auth token) --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
-# Log in to Docker:
+# Log into the container.
 #
-#   fdshell /bin/zsh
+#   OR
 #
-# About fdshell:
-#   https://github.com/uraitakahito/dotfiles/blob/37c4142038c658c468ade085cbc8883ba0ce1cc3/zsh/myzshrc#L93-L101
-#
-# Only for the first startup, change the owner of the command history folder:
-#
-#   sudo chown -R $(id -u):$(id -g) /zsh-volume
-#
-# ## Launch Claude
-#
-#   claude --dangerously-skip-permissions
-#
-# ## Connect from Visual Studio Code
+# Connect from Visual Studio Code:
 #
 # 1. Open **Command Palette (Shift + Command + p)**
 # 2. Select **Dev Containers: Attach to Running Container**
@@ -51,6 +34,10 @@
 #
 # For details:
 #   https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container
+#
+# (First time only) change the owner of the command history folder:
+#
+#   sudo chown -R $(id -u):$(id -g) /zsh-volume
 #
 # Run the following commands inside the Docker containers as needed:
 #
@@ -60,7 +47,7 @@
 #
 
 # Debian 12.13
-FROM debian:bookworm-20260112
+FROM debian:bookworm-20260202
 
 ARG user_name=developer
 ARG user_id
@@ -71,6 +58,11 @@ ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
 # Refer to the following URL for Node.js versions:
 #   https://nodejs.org/en/about/previous-releases
 ARG node_version="24.12.0"
+
+ARG LANG=C.UTF-8
+ENV LANG="$LANG"
+ARG TZ=UTC
+ENV TZ="$TZ"
 
 #
 # Git
@@ -91,6 +83,9 @@ RUN cd /usr/src && \
 #
 # Add user and install common utils.
 #
+# For the list of installed packages, see:
+#   https://github.com/uraitakahito/features/blob/deb6cf416fda206b99c7b771e9caa12e6952f9c7/src/common-utils/main.sh#L35-L78
+#
 RUN USERNAME=${user_name} \
     USERUID=${user_id} \
     USERGID=${group_id} \
@@ -107,9 +102,12 @@ RUN USERNAME=${user_name} \
 #
 RUN cd /usr/src && \
   git clone --depth 1 ${extra_utils_repository} && \
+  UPGRADEPACKAGES=false \
   ADDEZA=true \
   ADDGRPCURL=true \
-  UPGRADEPACKAGES=false \
+  ADDCLAUDECODE=true \
+  # Claude Code is installed under $HOME, so the username must be specified.
+  USERNAME=${user_name} \
     /usr/src/extra-utils/utils/install.sh
 
 #
@@ -133,17 +131,6 @@ USER ${user_name}
 RUN cd /home/${user_name} && \
   git clone --depth 1 ${dotfiles_repository} && \
   dotfiles/install.sh
-
-#
-# Timezone
-#
-ARG TZ
-ENV TZ="$TZ"
-
-#
-# Claude Code
-#
-RUN curl -fsSL https://claude.ai/install.sh | bash
 
 # express server
 EXPOSE 3000
