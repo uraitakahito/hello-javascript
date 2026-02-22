@@ -1,13 +1,15 @@
-# ## Features of this Dockerfile
+# Features of this Dockerfile
 #
 # - Not based on devcontainer; use by attaching VSCode to the container
+# - Claude Code is pre-installed
+# - Includes dotfiles and extra utilities
 # - Assumes host OS is Mac
-#
-# ## From Docker build to login
 #
 # Build the Docker image:
 #
 #   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g` --build-arg TZ=Asia/Tokyo
+#
+# (First time only) Create a volume for command history:
 #
 # Create a volume to persist the command history executed inside the Docker container.
 # It is stored in the volume because the dotfiles configuration redirects the shell history there.
@@ -19,22 +21,11 @@
 #
 #   docker container run -d --rm --init -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
-# Log in to Docker:
+# Log into the container.
 #
-#   fdshell /bin/zsh
+#   OR
 #
-# About fdshell:
-#   https://github.com/uraitakahito/dotfiles/blob/37c4142038c658c468ade085cbc8883ba0ce1cc3/zsh/myzshrc#L93-L101
-#
-# Only for the first startup, change the owner of the command history folder:
-#
-#   sudo chown -R $(id -u):$(id -g) /zsh-volume
-#
-# ## Launch Claude
-#
-#   claude --dangerously-skip-permissions
-#
-# ## Connect from Visual Studio Code
+# Connect from Visual Studio Code:
 #
 # 1. Open **Command Palette (Shift + Command + p)**
 # 2. Select **Dev Containers: Attach to Running Container**
@@ -42,6 +33,10 @@
 #
 # For details:
 #   https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container
+#
+# (First time only) change the owner of the command history folder:
+#
+#   sudo chown -R $(id -u):$(id -g) /zsh-volume
 #
 # Run the following commands inside the Docker containers as needed:
 #
