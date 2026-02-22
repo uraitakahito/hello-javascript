@@ -1,7 +1,6 @@
 # ## Features of this Dockerfile
 #
 # - Not based on devcontainer; use by attaching VSCode to the container
-#   - https://code.visualstudio.com/docs/devcontainers/attach-container
 # - Assumes host OS is Mac
 #
 # ## Preparation
