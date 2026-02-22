@@ -3,14 +3,6 @@
 # - Not based on devcontainer; use by attaching VSCode to the container
 # - Assumes host OS is Mac
 #
-# ## Preparation
-#
-# ### Download the files required to build the Docker container
-#
-#   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/heads/main/Dockerfile
-#   curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/heads/main/docker-entrypoint.sh
-#   chmod 755 docker-entrypoint.sh
-#
 # ## From Docker build to login
 #
 # Build the Docker image:
