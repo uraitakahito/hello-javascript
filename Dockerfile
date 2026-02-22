@@ -101,9 +101,12 @@ RUN USERNAME=${user_name} \
 #
 RUN cd /usr/src && \
   git clone --depth 1 ${extra_utils_repository} && \
+  UPGRADEPACKAGES=false \
   ADDEZA=true \
   ADDGRPCURL=true \
-  UPGRADEPACKAGES=false \
+  ADDCLAUDECODE=true \
+  # Claude Code is installed under $HOME, so the username must be specified.
+  USERNAME=${user_name} \
     /usr/src/extra-utils/utils/install.sh
 
 #
@@ -127,11 +130,6 @@ USER ${user_name}
 RUN cd /home/${user_name} && \
   git clone --depth 1 ${dotfiles_repository} && \
   dotfiles/install.sh
-
-#
-# Claude Code
-#
-RUN curl -fsSL https://claude.ai/install.sh | bash
 
 # express server
 EXPOSE 3000
