@@ -58,6 +58,9 @@ ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
 #   https://nodejs.org/en/about/previous-releases
 ARG node_version="24.12.0"
 
+ARG LANG=C.UTF-8
+ENV LANG="$LANG"
+
 #
 # Git
 #
