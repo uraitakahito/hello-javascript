@@ -7,7 +7,7 @@
 #
 # Build the Docker image:
 #
-#   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g` --build-arg TZ=Asia/Tokyo
+#   PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 #
 # (First time only) Create a volume for command history:
 #
@@ -60,6 +60,8 @@ ARG node_version="24.12.0"
 
 ARG LANG=C.UTF-8
 ENV LANG="$LANG"
+ARG TZ=UTC
+ENV TZ="$TZ"
 
 #
 # Git
@@ -122,12 +124,6 @@ USER ${user_name}
 RUN cd /home/${user_name} && \
   git clone --depth 1 ${dotfiles_repository} && \
   dotfiles/install.sh
-
-#
-# Timezone
-#
-ARG TZ
-ENV TZ="$TZ"
 
 #
 # Claude Code
