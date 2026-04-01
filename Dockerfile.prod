@@ -1,0 +1,30 @@
+# Features of this Dockerfile
+#
+# - Based on Google's distroless image (no shell, no package manager, minimal attack surface)
+# - Runs as nonroot user (UID 65534) by default
+# - No dependencies installed; only copies the application source
+# - The container exits after the script completes (run-to-completion model)
+#
+# Build the Docker image:
+#
+#   PROJECT=$(basename `pwd`) && docker image build -f Dockerfile.prod -t $PROJECT-prod-image .
+#
+# Run the Docker container:
+#
+#   docker container run --rm --name $PROJECT-prod-container $PROJECT-prod-image
+#
+# Expected output:
+#   bar!
+#   foo!
+#   baz!
+#
+
+# distroless Node.js 24 on Debian 12 (bookworm)
+#   https://github.com/GoogleContainerTools/distroless/tree/main/nodejs
+FROM gcr.io/distroless/nodejs24-debian12:nonroot
+
+WORKDIR /app
+
+COPY src/run-to-completion.cjs src/run-to-completion.cjs
+
+CMD ["src/run-to-completion.cjs"]

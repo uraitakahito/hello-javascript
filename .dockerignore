@@ -3,3 +3,4 @@
 
 # Allow only files needed for Docker build
 !docker-entrypoint.sh
+!src/run-to-completion.cjs
