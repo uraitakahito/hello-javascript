@@ -52,9 +52,9 @@ FROM debian:bookworm-20260316
 ARG user_name=developer
 ARG user_id
 ARG group_id
-# https://github.com/uraitakahito/dotfiles/releases/tag/1.0.0
+# https://github.com/uraitakahito/dotfiles/releases/tag/1.1.0
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
-ARG dotfiles_commit="61c0939b091432537631561facf67931682d0ff3"
+ARG dotfiles_commit="0484e07cffd330d86e1f914c33a008ba2d9cba37"
 # https://github.com/uraitakahito/features/releases/tag/1.0.0
 ARG features_repository="https://github.com/uraitakahito/features.git"
 ARG features_commit="e8d887d2e17e79f5289b0e8a087dd0730dcad24e"
