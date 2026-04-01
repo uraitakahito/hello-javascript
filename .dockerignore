@@ -3,4 +3,6 @@
 
 # Allow only files needed for Docker build
 !docker-entrypoint.sh
-!src/run-to-completion.cjs
+!package.json
+!package-lock.json
+!src/import-check/import-external-esmodule.js
