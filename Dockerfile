@@ -74,19 +74,19 @@ ENV TZ="$TZ"
 # Git
 #
 RUN apt-get update -qq && \
-  apt-get install -y -qq --no-install-recommends \
-    ca-certificates=20230311+deb12u1 \
-    git=1:2.39.5-0+deb12u3 && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+    apt-get install -y -qq --no-install-recommends \
+        ca-certificates=20230311+deb12u1 \
+        git=1:2.39.5-0+deb12u3 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 #
 # clone features
 #
 RUN cd /usr/src && \
-  git clone ${features_repository} && \
-  cd features && \
-  git checkout ${features_commit}
+    git clone ${features_repository} && \
+    cd features && \
+    git checkout ${features_commit}
 
 #
 # Add user and install common utils.
@@ -103,7 +103,7 @@ RUN USERNAME=${user_name} \
     # to ensure permission to access the mounted socket.
     #   https://github.com/uraitakahito/features/blob/59e8acea74ff0accd5c2c6f98ede1191a9e3b2aa/src/common-utils/main.sh#L467-L471
     ADDUSERTOROOTGROUP=true \
-      /usr/src/features/src/common-utils/install.sh
+        /usr/src/features/src/common-utils/install.sh
 
 #
 # Install extra utils.
@@ -132,7 +132,7 @@ RUN INSTALLYARNUSINGAPT=false \
     PNPM_VERSION="none" \
     USERNAME=${user_name} \
     VERSION=${node_version} \
-      /usr/src/features/src/node/install.sh
+        /usr/src/features/src/node/install.sh
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
@@ -142,10 +142,10 @@ USER ${user_name}
 # dotfiles
 #
 RUN cd /home/${user_name} && \
-  git clone ${dotfiles_repository} && \
-  cd dotfiles && \
-  git checkout ${dotfiles_commit} && \
-  ./install.sh
+    git clone ${dotfiles_repository} && \
+    cd dotfiles && \
+    git checkout ${dotfiles_commit} && \
+    ./install.sh
 
 # express server
 EXPOSE 3000
