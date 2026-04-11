@@ -52,15 +52,15 @@ FROM debian:bookworm-20260406
 ARG user_name=developer
 ARG user_id
 ARG group_id
-# https://github.com/uraitakahito/dotfiles/releases/tag/1.1.1
+# https://github.com/uraitakahito/dotfiles/releases/tag/1.1.2
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
-ARG dotfiles_commit="211e3a92dcbda2fd0b7fe4e842d2b077c49e096a"
+ARG dotfiles_commit="ee5f41890b9baa42d4bec889b73d1149ac38ad4f"
 # https://github.com/uraitakahito/features/releases/tag/1.0.0
 ARG features_repository="https://github.com/uraitakahito/features.git"
 ARG features_commit="e8d887d2e17e79f5289b0e8a087dd0730dcad24e"
-# https://github.com/uraitakahito/extra-utils/releases/tag/1.0.0
+# https://github.com/uraitakahito/extra-utils/releases/tag/1.1.0
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
-ARG extra_utils_commit="3fb9cf4625cdd57270adc48ddf1b230cf151fdf0"
+ARG extra_utils_commit="2c5b1ab72c7b98b2a9c42c084aa6b67cdaa36625"
 # Refer to the following URL for Node.js versions:
 #   https://nodejs.org/en/about/previous-releases
 ARG node_version="24.14.1"
