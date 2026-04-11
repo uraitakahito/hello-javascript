@@ -31,6 +31,12 @@
     "redhat.vscode-yaml",
 
     //
+    // OpenFGA
+    //
+    // https://marketplace.visualstudio.com/items?itemName=openfga.openfga-vscode
+    "openfga.openfga-vscode",
+
+    //
     // Linter & Formatter
     //
     // https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
