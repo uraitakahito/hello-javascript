@@ -69,6 +69,7 @@ ARG LANG=C.UTF-8
 ENV LANG="$LANG"
 ARG TZ=UTC
 ENV TZ="$TZ"
+ENV NODE_ENV=development
 
 #
 # Git

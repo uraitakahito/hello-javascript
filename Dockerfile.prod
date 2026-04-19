@@ -22,13 +22,18 @@ FROM node:24-bookworm-slim AS build
 
 WORKDIR /app
 
+ENV NODE_ENV=production
+
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
+# NODE_ENV=production ensures npm skips devDependencies automatically.
+RUN npm ci
 
 # --- Runtime stage ---
 # distroless Node.js 24 on Debian 12 (bookworm)
 #   https://github.com/GoogleContainerTools/distroless/tree/main/nodejs
 FROM gcr.io/distroless/nodejs24-debian12:nonroot
+
+ENV NODE_ENV=production
 
 WORKDIR /app
 

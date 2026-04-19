@@ -16,7 +16,10 @@ jobs:
         with:
           node-version: '24'
           cache: 'npm'
-      - run: npm ci
+      - name: Install dependencies
+        env:
+          NODE_ENV: development
+        run: npm ci
       - uses: reviewdog/action-eslint@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
