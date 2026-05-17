@@ -58,9 +58,9 @@ ARG dotfiles_commit="89501545e6d91811f549d031f65244cd7e0df87a"
 # https://github.com/uraitakahito/features/releases/tag/1.0.0
 ARG features_repository="https://github.com/uraitakahito/features.git"
 ARG features_commit="e8d887d2e17e79f5289b0e8a087dd0730dcad24e"
-# https://github.com/uraitakahito/extra-utils/releases/tag/1.2.0
+# https://github.com/uraitakahito/extra-utils/releases/tag/1.3.0
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
-ARG extra_utils_commit="1d565aa31f039a82ebd9f9018632b1d2eb377bdb"
+ARG extra_utils_commit="f975dbcb18f44b518cc181cedad57fd790d9894a"
 # Refer to the following URL for Node.js versions:
 #   https://nodejs.org/en/about/previous-releases
 ARG node_version="24.14.1"
