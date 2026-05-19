@@ -130,7 +130,7 @@ RUN cd /usr/src && \
 #
 RUN INSTALLYARNUSINGAPT=false \
     NVMVERSION="latest" \
-    PNPM_VERSION="none" \
+    PNPMVERSION="11.1.3" \
     USERNAME=${user_name} \
     VERSION=${node_version} \
         /usr/src/features/src/node/install.sh
