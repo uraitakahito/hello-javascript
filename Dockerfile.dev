@@ -47,20 +47,23 @@
 #
 
 # Debian 12.13
-FROM debian:bookworm-20260505
+FROM debian:bookworm-20260610
 
 ARG user_name=developer
 ARG user_id
 ARG group_id
-# https://github.com/uraitakahito/dotfiles/releases/tag/1.1.9
-ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
-ARG dotfiles_commit="89501545e6d91811f549d031f65244cd7e0df87a"
-# https://github.com/uraitakahito/features/releases/tag/1.0.0
-ARG features_repository="https://github.com/uraitakahito/features.git"
-ARG features_commit="e8d887d2e17e79f5289b0e8a087dd0730dcad24e"
+# https://github.com/uraitakahito/dev-user/releases/tag/1.0.0
+ARG dev_user_repository="https://github.com/uraitakahito/dev-user.git"
+ARG dev_user_commit="894e51b5cf42983af6c9e393ce93e163c365c9fe"
+# Original devcontainers/features
+ARG features_repository="https://github.com/devcontainers/features.git"
+ARG features_commit="a8f0b45732c6b170aa48d9276c01da13be9d6e71"
 # https://github.com/uraitakahito/extra-utils/releases/tag/1.3.0
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
 ARG extra_utils_commit="f975dbcb18f44b518cc181cedad57fd790d9894a"
+# https://github.com/uraitakahito/dotfiles/releases/tag/1.1.9
+ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
+ARG dotfiles_commit="89501545e6d91811f549d031f65244cd7e0df87a"
 # Refer to the following URL for Node.js versions:
 #   https://nodejs.org/en/about/previous-releases
 ARG node_version="24.14.1"
@@ -82,6 +85,21 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 #
+# Create the development user.
+#   UID/GID matched to host; reuse a colliding GID (macOS staff 20 == Debian dialout);
+#   add to root group so the bind-mounted ssh-agent socket is accessible.
+#
+RUN cd /usr/src && \
+    git clone ${dev_user_repository} && \
+    cd dev-user && \
+    git checkout ${dev_user_commit} && \
+    USERNAME=${user_name} \
+    USERUID=${user_id} \
+    USERGID=${group_id} \
+    ADDUSERTOROOTGROUP=true \
+        ./install.sh
+
+#
 # clone features
 #
 RUN cd /usr/src && \
@@ -90,20 +108,18 @@ RUN cd /usr/src && \
     git checkout ${features_commit}
 
 #
-# Add user and install common utils.
+# Install common utils.
+#   The development user already exists (created by dev-user above), so common-utils
+#   takes its "existing user" path and only sets up zsh, packages, etc.
 #
 # For the list of installed packages, see:
-#   https://github.com/uraitakahito/features/blob/deb6cf416fda206b99c7b771e9caa12e6952f9c7/src/common-utils/main.sh#L35-L78
+#   https://github.com/devcontainers/features/blob/main/src/common-utils/main.sh
 #
 RUN USERNAME=${user_name} \
     USERUID=${user_id} \
     USERGID=${group_id} \
     CONFIGUREZSHASDEFAULTSHELL=true \
     UPGRADEPACKAGES=false \
-    # When using ssh-agent inside Docker, add the user to the root group
-    # to ensure permission to access the mounted socket.
-    #   https://github.com/uraitakahito/features/blob/59e8acea74ff0accd5c2c6f98ede1191a9e3b2aa/src/common-utils/main.sh#L467-L471
-    ADDUSERTOROOTGROUP=true \
         /usr/src/features/src/common-utils/install.sh
 
 #
@@ -126,7 +142,7 @@ RUN cd /usr/src && \
 
 #
 # Install Node
-#   https://github.com/uraitakahito/features/blob/develop/src/node/install.sh
+#   https://github.com/devcontainers/features/blob/main/src/node/install.sh
 #
 RUN INSTALLYARNUSINGAPT=false \
     NVMVERSION="latest" \
