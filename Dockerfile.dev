@@ -52,15 +52,15 @@ FROM debian:bookworm-20260610
 ARG user_name=developer
 ARG user_id
 ARG group_id
+# https://github.com/uraitakahito/dev-user/releases/tag/1.0.0
+ARG dev_user_repository="https://github.com/uraitakahito/dev-user.git"
+ARG dev_user_commit="894e51b5cf42983af6c9e393ce93e163c365c9fe"
 # https://github.com/uraitakahito/dotfiles/releases/tag/1.1.9
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG dotfiles_commit="89501545e6d91811f549d031f65244cd7e0df87a"
 # Original devcontainers/features
 ARG features_repository="https://github.com/devcontainers/features.git"
 ARG features_commit="a8f0b45732c6b170aa48d9276c01da13be9d6e71"
-# https://github.com/uraitakahito/dev-user/releases/tag/1.0.0
-ARG dev_user_repository="https://github.com/uraitakahito/dev-user.git"
-ARG dev_user_commit="894e51b5cf42983af6c9e393ce93e163c365c9fe"
 # https://github.com/uraitakahito/extra-utils/releases/tag/1.3.0
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
 ARG extra_utils_commit="f975dbcb18f44b518cc181cedad57fd790d9894a"
