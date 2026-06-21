@@ -18,6 +18,22 @@
 #
 #   docker volume create $PROJECT-zsh-history
 #
+# ── なぜ認証に「fine-grained PAT」を使うのか（他方式の難点）──
+#
+# 前提：gh は GitHub API(HTTPS) を叩くため、認証にトークンが必須（SSH 鍵では API 認証はできない）。
+#       git は転送した ssh-agent（SSH リモート）で認証できるので、トークンが要るのは主に gh のため。
+#       しかもこのコンテナには Keychain が無く、トークンは平文の環境変数として渡る。
+#       ＝「万一漏れても被害が小さいトークン」を選ぶことが重要。
+#
+# - gho_（gh auth token の既定）：全リポジトリ(repo)・無期限で、漏洩時の被害が最大。→ 不採用
+# - classic PAT(ghp_)：有効期限は付けられるが、対象リポジトリを絞れない（scope 単位で全 repo）。→ 不採用
+# - GitHub App(ghs_/ghu_)：1〜8時間でさらに短命だが、自前 App の運用が必要・秘密鍵(親鍵)を
+#   コンテナに置けない・ghs_ は bot 名義になる、と運用が重い。→ 個人開発には過剰
+# - fine-grained PAT(github_pat_)：「このリポジトリだけ」＋「必要な権限だけ」＋「有効期限つき」に
+#   絞れ、本人名義のまま使え、設定も軽い。→ 使い捨てコンテナ＋個人開発に最適なので採用。
+#
+# 注意：fine-grained PAT は一部 API 非対応（例：gh status の通知）。権限不足は HTTP 403、期限切れは HTTP 401。
+#
 # （初回のみ）fine-grained PAT を macOS Keychain に保存する（以下で GH_TOKEN として使用）：
 #
 # fine-grained PAT を https://github.com/settings/personal-access-tokens/new で作成し
