@@ -4,7 +4,7 @@
 # - Claude Code is pre-installed
 # - Includes dotfiles and extra utilities
 # - Assumes host OS is Mac
-# - Passes the GH_TOKEN environment variable into the container
+# - Passes a fine-grained PAT (read from the macOS Keychain) into the container as GH_TOKEN
 #
 # Build the Docker image:
 #
@@ -18,9 +18,17 @@
 #
 #   docker volume create $PROJECT-zsh-history
 #
+# (First time only) Store your fine-grained PAT in the macOS Keychain (used below as GH_TOKEN):
+#
+# Create a fine-grained PAT at https://github.com/settings/personal-access-tokens/new
+# (limit it to the repos and permissions you need, with an expiration), then save it:
+#   security add-generic-password -a "$USER" -s m4-development -w
+#   (-w with no value prompts securely, so the PAT is never written to shell history.
+#    To rotate it later, re-run the same command with -U to overwrite.)
+#
 # Start the Docker container(/run/host-services/ssh-auth.sock is a virtual socket provided by Docker Desktop for Mac.):
 #
-#   docker container run -d --rm --init -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock -e GH_TOKEN=$(gh auth token) -e TERM=$TERM --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
+#   docker container run -d --rm --init -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock -e GH_TOKEN=$(security find-generic-password -a "$USER" -s m4-development -w) -e TERM=$TERM --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
 # Log into the container.
 #
