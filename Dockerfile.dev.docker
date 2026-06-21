@@ -8,7 +8,7 @@
 #
 # Docker イメージをビルドする場合：
 #
-#   PROJECT=$(basename `pwd`) && docker image build -f Dockerfile.dev -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+#   PROJECT=$(basename `pwd`) && docker image build -f Dockerfile.dev.docker -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 #
 # （初回のみ）コマンド履歴用のボリュームを作成します：
 #
