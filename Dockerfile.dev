@@ -1,53 +1,53 @@
-# Features of this Dockerfile
+# この Dockerfile の特徴
 #
-# - Not based on devcontainer; use by attaching VSCode to the container
-# - Claude Code is pre-installed
-# - Includes dotfiles and extra utilities
-# - Assumes host OS is Mac
-# - Passes a fine-grained PAT (read from the macOS Keychain) into the container as GH_TOKEN
+# - devcontainer ベースではない。VSCode をコンテナにアタッチして使う
+# - Claude Code をプリインストール済み
+# - dotfiles と追加ユーティリティを含む
+# - ホスト OS は Mac を前提
+# - fine-grained PAT（macOS Keychain から読み取る）を GH_TOKEN としてコンテナに渡す
 #
-# Build the Docker image:
+# Docker イメージをビルドする：
 #
 #   PROJECT=$(basename `pwd`) && docker image build -f Dockerfile.dev -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 #
-# (First time only) Create a volume for command history:
+# （初回のみ）コマンド履歴用のボリュームを作成する：
 #
-# Create a volume to persist the command history executed inside the Docker container.
-# It is stored in the volume because the dotfiles configuration redirects the shell history there.
+# Docker コンテナ内で実行したコマンド履歴を永続化するためのボリュームを作成する。
+# dotfiles の設定でシェル履歴の保存先をそこへリダイレクトしているため、ボリュームに保存される。
 #   https://github.com/uraitakahito/dotfiles/blob/b80664a2735b0442ead639a9d38cdbe040b81ab0/zsh/myzshrc#L298-L305
 #
 #   docker volume create $PROJECT-zsh-history
 #
-# (First time only) Store your fine-grained PAT in the macOS Keychain (used below as GH_TOKEN):
+# （初回のみ）fine-grained PAT を macOS Keychain に保存する（以下で GH_TOKEN として使用）：
 #
-# Create a fine-grained PAT at https://github.com/settings/personal-access-tokens/new
-# (limit it to the repos and permissions you need, with an expiration), then save it:
+# fine-grained PAT を https://github.com/settings/personal-access-tokens/new で作成し
+# （必要な repo と権限だけに絞り、有効期限を付ける）、次のように保存する：
 #   security add-generic-password -a "$USER" -s m4-development -w
-#   (-w with no value prompts securely, so the PAT is never written to shell history.
-#    To rotate it later, re-run the same command with -U to overwrite.)
+#   （-w に値を付けないと安全に入力でき、PAT がシェル履歴に残らない。
+#    後でローテーションするときは同じコマンドを -U 付きで再実行して上書きする。）
 #
-# Start the Docker container(/run/host-services/ssh-auth.sock is a virtual socket provided by Docker Desktop for Mac.):
+# Docker コンテナを起動する（/run/host-services/ssh-auth.sock は Docker Desktop for Mac が提供する仮想ソケット）：
 #
 #   docker container run -d --rm --init -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock -e GH_TOKEN=$(security find-generic-password -a "$USER" -s m4-development -w) -e TERM=$TERM --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
-# Log into the container.
+# コンテナにログインする。
 #
-#   OR
+#   または
 #
-# Connect from Visual Studio Code:
+# Visual Studio Code から接続する：
 #
-# 1. Open **Command Palette (Shift + Command + p)**
-# 2. Select **Dev Containers: Attach to Running Container**
-# 3. Open the `/app` directory
+# 1. **コマンドパレット (Shift + Command + p)** を開く
+# 2. **Dev Containers: Attach to Running Container** を選択する
+# 3. `/app` ディレクトリを開く
 #
-# For details:
+# 詳細：
 #   https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container
 #
-# (First time only) change the owner of the command history folder:
+# （初回のみ）コマンド履歴フォルダの所有者を変更する：
 #
 #   sudo chown -R $(id -u):$(id -g) /zsh-volume
 #
-# Run the following commands inside the Docker containers as needed:
+# 必要に応じて Docker コンテナ内で以下のコマンドを実行する：
 #
 # ```sh
 # npm ci
@@ -63,7 +63,7 @@ ARG group_id
 # https://github.com/uraitakahito/dev-user/releases/tag/1.0.0
 ARG dev_user_repository="https://github.com/uraitakahito/dev-user.git"
 ARG dev_user_commit="894e51b5cf42983af6c9e393ce93e163c365c9fe"
-# Original devcontainers/features
+# 本家の devcontainers/features
 ARG features_repository="https://github.com/devcontainers/features.git"
 ARG features_commit="a8f0b45732c6b170aa48d9276c01da13be9d6e71"
 # https://github.com/uraitakahito/extra-utils/releases/tag/1.3.0
@@ -72,7 +72,7 @@ ARG extra_utils_commit="f975dbcb18f44b518cc181cedad57fd790d9894a"
 # https://github.com/uraitakahito/dotfiles/releases/tag/1.1.9
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG dotfiles_commit="89501545e6d91811f549d031f65244cd7e0df87a"
-# Refer to the following URL for Node.js versions:
+# Node.js のバージョンは次の URL を参照：
 #   https://nodejs.org/en/about/previous-releases
 ARG node_version="24.14.1"
 
@@ -93,9 +93,9 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 #
-# Create the development user.
-#   UID/GID matched to host; reuse a colliding GID (macOS staff 20 == Debian dialout);
-#   add to root group so the bind-mounted ssh-agent socket is accessible.
+# 開発用ユーザーを作成する。
+#   UID/GID はホストに合わせる。衝突する GID は再利用する（macOS の staff 20 == Debian の dialout）。
+#   bind マウントした ssh-agent ソケットにアクセスできるよう root グループに追加する。
 #
 RUN cd /usr/src && \
     git clone ${dev_user_repository} && \
@@ -108,7 +108,7 @@ RUN cd /usr/src && \
         ./install.sh
 
 #
-# clone features
+# features を clone する
 #
 RUN cd /usr/src && \
     git clone ${features_repository} && \
@@ -116,11 +116,11 @@ RUN cd /usr/src && \
     git checkout ${features_commit}
 
 #
-# Install common utils.
-#   The development user already exists (created by dev-user above), so common-utils
-#   takes its "existing user" path and only sets up zsh, packages, etc.
+# common utils をインストールする。
+#   開発用ユーザーは既に存在する（上の dev-user で作成済み）ため、common-utils は
+#   「既存ユーザー」用の経路を通り、zsh やパッケージ等のセットアップのみ行う。
 #
-# For the list of installed packages, see:
+# インストールされるパッケージの一覧は次を参照：
 #   https://github.com/devcontainers/features/blob/main/src/common-utils/main.sh
 #
 RUN USERNAME=${user_name} \
@@ -131,7 +131,7 @@ RUN USERNAME=${user_name} \
         /usr/src/features/src/common-utils/install.sh
 
 #
-# Install extra utils.
+# extra utils をインストールする。
 #
 RUN cd /usr/src && \
     git clone ${extra_utils_repository} && \
@@ -142,14 +142,14 @@ RUN cd /usr/src && \
     ADDHADOLINT=true \
     \
     ADDCLAUDECODE=true \
-    # Claude Code is installed under $HOME, so the username must be specified.
+    # Claude Code は $HOME 配下にインストールされるため、ユーザー名の指定が必要。
     USERNAME=${user_name} \
     \
     UPGRADEPACKAGES=false \
         /usr/src/extra-utils/utils/install.sh
 
 #
-# Install Node
+# Node をインストールする
 #   https://github.com/devcontainers/features/blob/main/src/node/install.sh
 #
 RUN INSTALLYARNUSINGAPT=false \
@@ -172,7 +172,7 @@ RUN cd /home/${user_name} && \
     git checkout ${dotfiles_commit} && \
     ./install.sh
 
-# express server
+# express サーバー
 EXPOSE 3000
 
 WORKDIR /app
