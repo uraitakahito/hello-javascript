@@ -1,0 +1,192 @@
+# この Dockerfile の特徴（Apple Container 版）
+#
+# - Apple の container(https://github.com/apple/container) 用の開発コンテナです（Docker/OrbStack 版は Dockerfile.dev.docker）
+# - Dev Containers の devcontainer.json 運用は対象外。Visual Studio Code からアタッチして使います
+#   （拡張設定 "dev.containers.experimentalAppleContainerSupport": true が必要）
+# - Claude Code をプリインストール済みです
+# - カスタマイズ可能な dotfiles と追加ユーティリティを含みます
+# - macOS 26+（Tahoe）/ Apple Silicon が前提です（container の要件）
+# - コンテナ内で GitHub を利用したい場合は fine-grained PAT を GH_TOKEN として渡すことを想定しています
+#
+# （初回のみ）container のサービスを起動します（初回はカーネル導入を尋ねられます）：
+#
+#   container system start
+#
+# イメージをビルドする場合：
+#
+#   PROJECT=$(basename `pwd`) && container build -f Dockerfile.dev.container -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+#
+# （初回のみ）コマンド履歴用のボリュームを作成します：
+#
+# ボリュームはコンテナ内で実行したコマンド履歴を保存するために使用されます。
+# dotfiles の設定でシェル履歴の保存先をそこへリダイレクトしているため、ボリュームに保存されます。
+#   https://github.com/uraitakahito/dotfiles/blob/b80664a2735b0442ead639a9d38cdbe040b81ab0/zsh/myzshrc#L298-L305
+#
+#   container volume create $PROJECT-zsh-history
+#
+# ── なぜ認証に「fine-grained PAT」を使うのか（他方式の難点）──
+#
+# 前提：gh は GitHub API(HTTPS) を叩くため、認証にトークンが必須です（SSH 鍵では API 認証はできない）。
+#
+# - gho_（gh auth token の既定）：全リポジトリ(repo)・無期限で、漏洩時の被害が最大。→ 不採用
+# - classic PAT(ghp_)：有効期限は付けられるが、対象リポジトリを絞れない（scope 単位で全 repo）。→ 不採用
+# - GitHub App(ghs_/ghu_)：1〜8時間でさらに短命だが、自前 App の運用が必要・秘密鍵(親鍵)を
+#   コンテナに置けない・ghs_ は bot 名義になる、と運用が重い。→ 個人開発には過剰
+# - fine-grained PAT(github_pat_)：「このリポジトリだけ」＋「必要な権限だけ」＋「有効期限つき」に
+#   絞れ、本人名義のまま使え、設定も軽い。→ 使い捨てコンテナ＋個人開発に最適なので採用。
+#
+# 注意：fine-grained PAT は一部 API 非対応（例：gh status の通知）。権限不足は HTTP 403、期限切れは HTTP 401。
+#
+# （初回のみ）fine-grained PAT を macOS Keychain に保存します（以下で GH_TOKEN として使用）：
+#
+# fine-grained PAT を https://github.com/settings/personal-access-tokens/new で作成し
+#   security add-generic-password -a "$USER" -s development-pat -w
+#   （-w に値を付けないと安全に入力でき、PAT がシェル履歴に残らない。
+#    後でローテーションするときは同じコマンドを -U 付きで再実行して上書きします。）
+#
+# コンテナを起動する場合（ssh-agent はホストから --ssh で転送。SSH_AUTH_SOCK は自動設定されます）：
+#
+#   container run -d --rm --init --ssh -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
+#
+# コンテナにログインする。
+#
+#   container exec -it $PROJECT-container /bin/zsh
+#
+#   または
+#
+# Visual Studio Code から接続する（拡張設定 "dev.containers.experimentalAppleContainerSupport": true が必要）：
+#
+# 1. **コマンドパレット (Shift + Command + p)** を開く
+# 2. **Dev Containers: Attach to Running Container** を選択する
+# 3. `/app` ディレクトリを開く
+#
+# 詳細：
+#   https://github.com/microsoft/vscode-remote-release/issues/11012
+#
+# （初回のみ）コマンド履歴フォルダの所有者を変更します：
+#
+#   sudo chown -R $(id -u):$(id -g) /zsh-volume
+#
+
+# Debian 12.13
+FROM docker.io/library/debian:bookworm-20260610
+
+ARG user_name=developer
+ARG user_id
+ARG group_id
+# https://github.com/uraitakahito/dev-user/releases/tag/1.0.0
+ARG dev_user_repository="https://github.com/uraitakahito/dev-user.git"
+ARG dev_user_commit="894e51b5cf42983af6c9e393ce93e163c365c9fe"
+# 本家の devcontainers/features
+ARG features_repository="https://github.com/devcontainers/features.git"
+ARG features_commit="a8f0b45732c6b170aa48d9276c01da13be9d6e71"
+# https://github.com/uraitakahito/extra-utils/releases/tag/1.3.0
+ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
+ARG extra_utils_commit="f975dbcb18f44b518cc181cedad57fd790d9894a"
+# https://github.com/uraitakahito/dotfiles/releases/tag/1.1.12
+ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
+ARG dotfiles_commit="c945f655428b97788b6b5c0071f425e0167cc05e"
+# Node.js のバージョンは次の URL を参照：
+#   https://nodejs.org/en/about/previous-releases
+ARG node_version="24.14.1"
+
+ARG LANG=C.UTF-8
+ENV LANG="$LANG"
+ARG TZ=UTC
+ENV TZ="$TZ"
+ENV NODE_ENV=development
+
+#
+# Git
+#
+RUN apt-get update -qq && \
+    apt-get install -y -qq --no-install-recommends \
+        ca-certificates=20230311+deb12u1 \
+        git=1:2.39.5-0+deb12u3 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+#
+# 開発用ユーザーを作成します。
+#   UID/GID はホストに合わせます。衝突する GID は再利用します（macOS の staff 20 == Debian の dialout）。
+#   ※ Docker 版の ADDUSERTOROOTGROUP は不要（container の --ssh ソケットは srw-rw-rw-=world rw のため）。
+#
+RUN cd /usr/src && \
+    git clone ${dev_user_repository} && \
+    cd dev-user && \
+    git checkout ${dev_user_commit} && \
+    USERNAME=${user_name} \
+    USERUID=${user_id} \
+    USERGID=${group_id} \
+        ./install.sh
+
+#
+# features を clone します
+#
+RUN cd /usr/src && \
+    git clone ${features_repository} && \
+    cd features && \
+    git checkout ${features_commit}
+
+#
+# common utils をインストールします。
+#   パッケージ等のセットアップを行います。
+#
+# インストールされるパッケージの一覧は次を参照：
+#   https://github.com/devcontainers/features/blob/main/src/common-utils/main.sh
+#
+RUN USERNAME=${user_name} \
+    USERUID=${user_id} \
+    USERGID=${group_id} \
+    CONFIGUREZSHASDEFAULTSHELL=true \
+    UPGRADEPACKAGES=false \
+        /usr/src/features/src/common-utils/install.sh
+
+#
+# extra utils をインストールします。
+#
+RUN cd /usr/src && \
+    git clone ${extra_utils_repository} && \
+    cd extra-utils && \
+    git checkout ${extra_utils_commit} && \
+    ADDEZA=true \
+    ADDGRPCURL=true \
+    ADDHADOLINT=true \
+    \
+    ADDCLAUDECODE=true \
+    # Claude Code は $HOME 配下にインストールされるため、ユーザー名の指定が必要。
+    USERNAME=${user_name} \
+    \
+    UPGRADEPACKAGES=false \
+        /usr/src/extra-utils/utils/install.sh
+
+#
+# Node をインストールします。
+#   https://github.com/devcontainers/features/blob/main/src/node/install.sh
+#
+RUN INSTALLYARNUSINGAPT=false \
+    NVMVERSION="latest" \
+    PNPMVERSION="11.1.3" \
+    USERNAME=${user_name} \
+    VERSION=${node_version} \
+        /usr/src/features/src/node/install.sh
+
+COPY docker-entrypoint.sh /usr/local/bin/
+
+USER ${user_name}
+
+#
+# dotfiles
+#
+RUN cd /home/${user_name} && \
+    git clone ${dotfiles_repository} && \
+    cd dotfiles && \
+    git checkout ${dotfiles_commit} && \
+    ./install.sh
+
+# express サーバー
+EXPOSE 3000
+
+WORKDIR /app
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["tail", "-F", "/dev/null"]
