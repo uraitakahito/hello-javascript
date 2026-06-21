@@ -1,29 +1,26 @@
 # この Dockerfile の特徴
 #
-# - devcontainer ベースではない。VSCode をコンテナにアタッチして使う
-# - Claude Code をプリインストール済み
-# - dotfiles と追加ユーティリティを含む
-# - ホスト OS は Mac を前提
-# - fine-grained PAT（macOS Keychain から読み取る）を GH_TOKEN としてコンテナに渡す
+# - Dev Containersでの利用は対象ではありません。Visual Studio Codeから利用したい場合はコンテナにアタッチして使ってください
+# - Claude Code をプリインストール済みです
+# - カスタマイズ可能な dotfiles と追加ユーティリティを含みます
+# - ホスト OS は Mac でのみ動作確認しています
+# - Dockerコンテナ内でGitHubを利用したい場合はfine-grained PATを GH_TOKEN としてコンテナに渡すことを想定しています
 #
-# Docker イメージをビルドする：
+# Docker イメージをビルドする場合：
 #
 #   PROJECT=$(basename `pwd`) && docker image build -f Dockerfile.dev -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 #
-# （初回のみ）コマンド履歴用のボリュームを作成する：
+# （初回のみ）コマンド履歴用のボリュームを作成します：
 #
-# Docker コンテナ内で実行したコマンド履歴を永続化するためのボリュームを作成する。
-# dotfiles の設定でシェル履歴の保存先をそこへリダイレクトしているため、ボリュームに保存される。
+# ボリュームはDocker コンテナ内で実行したコマンド履歴を保存するために使用されます。
+# dotfiles の設定でシェル履歴の保存先をそこへリダイレクトしているため、ボリュームに保存されます。
 #   https://github.com/uraitakahito/dotfiles/blob/b80664a2735b0442ead639a9d38cdbe040b81ab0/zsh/myzshrc#L298-L305
 #
 #   docker volume create $PROJECT-zsh-history
 #
 # ── なぜ認証に「fine-grained PAT」を使うのか（他方式の難点）──
 #
-# 前提：gh は GitHub API(HTTPS) を叩くため、認証にトークンが必須（SSH 鍵では API 認証はできない）。
-#       git は転送した ssh-agent（SSH リモート）で認証できるので、トークンが要るのは主に gh のため。
-#       しかもこのコンテナには Keychain が無く、トークンは平文の環境変数として渡る。
-#       ＝「万一漏れても被害が小さいトークン」を選ぶことが重要。
+# 前提：gh は GitHub API(HTTPS) を叩くため、認証にトークンが必須です（SSH 鍵では API 認証はできない）。
 #
 # - gho_（gh auth token の既定）：全リポジトリ(repo)・無期限で、漏洩時の被害が最大。→ 不採用
 # - classic PAT(ghp_)：有効期限は付けられるが、対象リポジトリを絞れない（scope 単位で全 repo）。→ 不採用
@@ -34,17 +31,16 @@
 #
 # 注意：fine-grained PAT は一部 API 非対応（例：gh status の通知）。権限不足は HTTP 403、期限切れは HTTP 401。
 #
-# （初回のみ）fine-grained PAT を macOS Keychain に保存する（以下で GH_TOKEN として使用）：
+# （初回のみ）fine-grained PAT を macOS Keychain に保存します（以下で GH_TOKEN として使用）：
 #
 # fine-grained PAT を https://github.com/settings/personal-access-tokens/new で作成し
-# （必要な repo と権限だけに絞り、有効期限を付ける）、次のように保存する：
-#   security add-generic-password -a "$USER" -s m4-development -w
+#   security add-generic-password -a "$USER" -s development-pat -w
 #   （-w に値を付けないと安全に入力でき、PAT がシェル履歴に残らない。
-#    後でローテーションするときは同じコマンドを -U 付きで再実行して上書きする。）
+#    後でローテーションするときは同じコマンドを -U 付きで再実行して上書きします。）
 #
-# Docker コンテナを起動する（/run/host-services/ssh-auth.sock は Docker Desktop for Mac が提供する仮想ソケット）：
+# Docker コンテナを起動する場合（/run/host-services/ssh-auth.sock は Docker Desktop for Mac が提供する仮想ソケット）：
 #
-#   docker container run -d --rm --init -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock -e GH_TOKEN=$(security find-generic-password -a "$USER" -s m4-development -w) -e TERM=$TERM --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
+#   docker container run -d --rm --init -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
 # コンテナにログインする。
 #
@@ -59,15 +55,9 @@
 # 詳細：
 #   https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container
 #
-# （初回のみ）コマンド履歴フォルダの所有者を変更する：
+# （初回のみ）コマンド履歴フォルダの所有者を変更します：
 #
 #   sudo chown -R $(id -u):$(id -g) /zsh-volume
-#
-# 必要に応じて Docker コンテナ内で以下のコマンドを実行する：
-#
-# ```sh
-# npm ci
-# ```
 #
 
 # Debian 12.13
@@ -109,9 +99,9 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 #
-# 開発用ユーザーを作成する。
-#   UID/GID はホストに合わせる。衝突する GID は再利用する（macOS の staff 20 == Debian の dialout）。
-#   bind マウントした ssh-agent ソケットにアクセスできるよう root グループに追加する。
+# 開発用ユーザーを作成します。
+#   UID/GID はホストに合わせます。衝突する GID は再利用します（macOS の staff 20 == Debian の dialout）。
+#   bind マウントした ssh-agent ソケットにアクセスできるよう root グループに追加します。
 #
 RUN cd /usr/src && \
     git clone ${dev_user_repository} && \
@@ -124,7 +114,7 @@ RUN cd /usr/src && \
         ./install.sh
 
 #
-# features を clone する
+# features を clone します
 #
 RUN cd /usr/src && \
     git clone ${features_repository} && \
@@ -132,9 +122,8 @@ RUN cd /usr/src && \
     git checkout ${features_commit}
 
 #
-# common utils をインストールする。
-#   開発用ユーザーは既に存在する（上の dev-user で作成済み）ため、common-utils は
-#   「既存ユーザー」用の経路を通り、zsh やパッケージ等のセットアップのみ行う。
+# common utils をインストールします。
+#   パッケージ等のセットアップを行います。
 #
 # インストールされるパッケージの一覧は次を参照：
 #   https://github.com/devcontainers/features/blob/main/src/common-utils/main.sh
@@ -147,7 +136,7 @@ RUN USERNAME=${user_name} \
         /usr/src/features/src/common-utils/install.sh
 
 #
-# extra utils をインストールする。
+# extra utils をインストールします。
 #
 RUN cd /usr/src && \
     git clone ${extra_utils_repository} && \
@@ -165,7 +154,7 @@ RUN cd /usr/src && \
         /usr/src/extra-utils/utils/install.sh
 
 #
-# Node をインストールする
+# Node をインストールします。
 #   https://github.com/devcontainers/features/blob/main/src/node/install.sh
 #
 RUN INSTALLYARNUSINGAPT=false \
