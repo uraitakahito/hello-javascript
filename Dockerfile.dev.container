@@ -1,4 +1,4 @@
-# この Dockerfile の特徴（Apple Container 版）
+# この Dockerfile の特徴
 #
 # - Apple の container(https://github.com/apple/container) 用の開発コンテナです（Docker/OrbStack 版は Dockerfile.dev.docker）
 # - Dev Containers の devcontainer.json 運用は対象外。Visual Studio Code からアタッチして使います
@@ -47,8 +47,7 @@
 # コンテナを起動する場合（ssh-agent はホストから --ssh で転送。SSH_AUTH_SOCK は自動設定されます）：
 #
 #   -m でメモリ上限を指定します。container の既定は 1GiB で、Visual Studio Code をアタッチして使うと
-#   拡張ホスト（拡張機能を動かす Node プロセス）が OOM で繰り返し落ちます。まずは 4G を、足りなければ
-#   8G などへ増やしてください（確認: container exec $PROJECT-container cat /sys/fs/cgroup/memory.max）。
+#   拡張ホスト（拡張機能を動かす Node プロセス）が OOM で繰り返し落ちます。
 #
 #   container run -d --rm --init --ssh -m 4G -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
@@ -56,16 +55,13 @@
 #
 #   container exec -it $PROJECT-container /bin/zsh
 #
-#   または
+# または
 #
 # Visual Studio Code から接続する（拡張設定 "dev.containers.experimentalAppleContainerSupport": true が必要）：
 #
 # 1. **コマンドパレット (Shift + Command + p)** を開く
-# 2. **Dev Containers: Attach to Running Container** を選択する
+# 2. **Dev Containers: Attach to Running Apple Container** を選択する
 # 3. `/app` ディレクトリを開く
-#
-# 詳細：
-#   https://github.com/microsoft/vscode-remote-release/issues/11012
 #
 # （初回のみ）コマンド履歴フォルダの所有者を変更します：
 #
