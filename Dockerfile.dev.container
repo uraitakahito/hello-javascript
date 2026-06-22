@@ -184,9 +184,6 @@ RUN cd /home/${user_name} && \
     git checkout ${dotfiles_commit} && \
     ./install.sh
 
-# express サーバー
-EXPOSE 3000
-
 WORKDIR /app
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["tail", "-F", "/dev/null"]
