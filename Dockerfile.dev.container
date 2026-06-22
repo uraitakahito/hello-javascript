@@ -109,7 +109,7 @@ RUN apt-get update -qq && \
 #
 # 開発用ユーザーを作成します。
 #   UID/GID はホストに合わせます。衝突する GID は再利用します（macOS の staff 20 == Debian の dialout）。
-#   ※ Docker 版の ADDUSERTOROOTGROUP は不要（container の --ssh ソケットは srw-rw-rw-=world rw のため）。
+#   container の --ssh ソケットは srw-rw-rw-=world rw です。
 #
 RUN cd /usr/src && \
     git clone ${dev_user_repository} && \
