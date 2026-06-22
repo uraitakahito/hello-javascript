@@ -3,3 +3,9 @@
 coverage
 node_modules
 
+# VS Code: 実体は *.sample.jsonc。*.json は link-vscode-config.sh が貼る symlink。
+.vscode/extensions.json
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
+
