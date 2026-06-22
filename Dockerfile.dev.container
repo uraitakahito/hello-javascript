@@ -46,7 +46,11 @@
 #
 # コンテナを起動する場合（ssh-agent はホストから --ssh で転送。SSH_AUTH_SOCK は自動設定されます）：
 #
-#   container run -d --rm --init --ssh -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
+#   -m でメモリ上限を指定します。container の既定は 1GiB で、Visual Studio Code をアタッチして使うと
+#   拡張ホスト（拡張機能を動かす Node プロセス）が OOM で繰り返し落ちます。まずは 4G を、足りなければ
+#   8G などへ増やしてください（確認: container exec $PROJECT-container cat /sys/fs/cgroup/memory.max）。
+#
+#   container run -d --rm --init --ssh -m 4G -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
 # コンテナにログインする。
 #
