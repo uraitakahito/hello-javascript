@@ -12,9 +12,9 @@
 #
 #   container system start
 #
-# イメージをビルドする場合：
+# イメージをビルドする場合（フォルダ名の大文字はイメージ名に使えないため tr で小文字化します）：
 #
-#   PROJECT=$(basename `pwd`) && container build -f Dockerfile.dev.container -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+#   PROJECT=$(basename `pwd` | tr '[:upper:]' '[:lower:]') && container build -f Dockerfile.dev.container -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 #
 # （初回のみ）コマンド履歴用のボリュームを作成します：
 #
