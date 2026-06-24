@@ -27,6 +27,11 @@
 #
 #   container volume create $PROJECT-zsh-history
 #
+# （初回のみ）Claude Code のセッション・設定の保存先ボリュームを作成します：
+# これにより、コンテナを --rm で使い捨てても `claude --resume` で会話を再開できます。
+#
+#   container volume create $PROJECT-claude
+#
 # ── なぜ認証に「fine-grained PAT」を使うのか（他方式の難点）──
 #
 # 前提：gh は GitHub API(HTTPS) を叩くため、認証にトークンが必須です（SSH 鍵では API 認証はできない）。
@@ -51,8 +56,10 @@
 #
 #   -m でメモリ上限を指定します。container の既定は 1GiB で、Visual Studio Code をアタッチして使うと
 #   拡張ホスト（拡張機能を動かす Node プロセス）が OOM で繰り返し落ちます。
+#   --mount の /claude-config は Claude Code のセッション保存先（ENV CLAUDE_CONFIG_DIR）を
+#   永続化し、コンテナを --rm で破棄しても claude --resume を使えるようにします。
 #
-#   container run -d --rm --init --ssh -m 8G --dns 1.1.1.1 --dns 8.8.8.8 -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
+#   container run -d --rm --init --ssh -m 8G --dns 1.1.1.1 --dns 8.8.8.8 -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --mount type=volume,source=$PROJECT-claude,target=/claude-config --name $PROJECT-container $PROJECT-image
 #
 # コンテナにログインする。
 #
@@ -66,9 +73,10 @@
 # 2. **Dev Containers: Attach to Running Apple Container** を選択する
 # 3. `/app` ディレクトリを開く
 #
-# （初回のみ）コマンド履歴フォルダの所有者を変更します：
+# （初回のみ）マウントしたボリューム（コマンド履歴・Claude 設定）の所有者を変更します：
 #
 #   sudo chown -R $(id -u):$(id -g) /zsh-volume
+#   sudo chown -R $(id -u):$(id -g) /claude-config
 #
 
 # Debian 12.13
@@ -175,6 +183,12 @@ RUN INSTALLYARNUSINGAPT=false \
         /usr/src/features/src/node/install.sh
 
 COPY docker-entrypoint.sh /usr/local/bin/
+
+# Claude Code のセッション・設定の保存先（永続ボリュームのマウント先）。
+# 起動コマンドで同名ボリュームをここにマウントすると `claude --resume` が使えるようになる。
+# developer が書けるよう、root のうちに作成して所有者を渡しておく。
+RUN mkdir -p /claude-config && chown ${user_id}:${group_id} /claude-config
+ENV CLAUDE_CONFIG_DIR=/claude-config
 
 USER ${user_name}
 
