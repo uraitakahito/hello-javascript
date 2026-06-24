@@ -184,9 +184,17 @@ RUN INSTALLYARNUSINGAPT=false \
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
-# Claude Code のセッション・設定の保存先（永続ボリュームのマウント先）。
-# 起動コマンドで同名ボリュームをここにマウントすると `claude --resume` が使えるようになる。
-# developer が書けるよう、root のうちに作成して所有者を渡しておく。
+#
+# zshの履歴の保存先。
+#   ボリュームをマウントすると意味はないが、マウント失敗時の保険をかけておく。
+#
+RUN mkdir -p /zsh-volume && chown ${user_id}:${group_id} /zsh-volume
+
+#
+# Claude Code のセッション・設定の保存先
+#   起動コマンドで同名ボリュームをここにマウントすると `claude --resume` が使えるようになる。
+#   ボリュームをマウントすると意味はないが、マウント失敗時の保険をかけておく。
+#
 RUN mkdir -p /claude-config && chown ${user_id}:${group_id} /claude-config
 ENV CLAUDE_CONFIG_DIR=/claude-config
 
