@@ -14,7 +14,10 @@
 #
 # イメージをビルドする場合（フォルダ名の大文字はイメージ名に使えないため tr で小文字化します）：
 #
-#   PROJECT=$(basename `pwd` | tr '[:upper:]' '[:lower:]') && container build -f Dockerfile.dev.container -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+#   --dns で DNS サーバーを明示します（1.1.1.1=Cloudflare / 8.8.8.8=Google）。
+#   既定では名前解決ができず apt-get / git clone / Node ダウンロードが失敗する環境向けの保険です。
+#
+#   PROJECT=$(basename `pwd` | tr '[:upper:]' '[:lower:]') && container build -f Dockerfile.dev.container -t $PROJECT-image . --dns 1.1.1.1 --dns 8.8.8.8 --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
 #
 # （初回のみ）コマンド履歴用のボリュームを作成します：
 #
@@ -49,7 +52,7 @@
 #   -m でメモリ上限を指定します。container の既定は 1GiB で、Visual Studio Code をアタッチして使うと
 #   拡張ホスト（拡張機能を動かす Node プロセス）が OOM で繰り返し落ちます。
 #
-#   container run -d --rm --init --ssh -m 8G -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
+#   container run -d --rm --init --ssh -m 8G --dns 1.1.1.1 --dns 8.8.8.8 -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
 # コンテナにログインする。
 #
