@@ -49,7 +49,7 @@
 #   -m でメモリ上限を指定します。container の既定は 1GiB で、Visual Studio Code をアタッチして使うと
 #   拡張ホスト（拡張機能を動かす Node プロセス）が OOM で繰り返し落ちます。
 #
-#   container run -d --rm --init --ssh -m 4G -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
+#   container run -d --rm --init --ssh -m 8G -e GH_TOKEN=$(security find-generic-password -a "$USER" -s development-pat -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
 #
 # コンテナにログインする。
 #
