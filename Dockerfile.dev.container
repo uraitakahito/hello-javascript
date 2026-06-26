@@ -79,8 +79,7 @@
 #
 # （初回のみ）マウントしたボリューム（コマンド履歴・Claude 設定）の所有者を変更します：
 #
-#   sudo chown -R $(id -u):$(id -g) /zsh-volume
-#   sudo chown -R $(id -u):$(id -g) /claude-config
+#   sudo chown -R $(id -u):$(id -g) /zsh-volume /claude-config
 #
 
 # Debian 12.13
