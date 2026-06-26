@@ -48,7 +48,7 @@
 # （初回のみ）fine-grained PAT を macOS Keychain に保存します（以下で GH_TOKEN として使用）：
 #
 # fine-grained PAT を https://github.com/settings/personal-access-tokens/new で作成し
-#   security add-generic-password -a "$USER" -s m4-development -w
+#   security add-generic-password -a "$USER" -s YOUR-FINE-GRAINED-PAT -w
 #   （-w に値を付けないと安全に入力でき、PAT がシェル履歴に残らない。
 #    後でローテーションするときは同じコマンドを -U 付きで再実行して上書きします。）
 #
@@ -59,7 +59,11 @@
 #   --mount の /claude-config は Claude Code のセッション保存先（ENV CLAUDE_CONFIG_DIR）を
 #   永続化し、コンテナを --rm で破棄しても claude --resume を使えるようにします。
 #
-#   container run -d --rm --init --ssh -m 8G --dns 1.1.1.1 --dns 8.8.8.8 -e GH_TOKEN=$(security find-generic-password -a "$USER" -s m4-development -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --mount type=volume,source=$PROJECT-claude,target=/claude-config --name $PROJECT-container $PROJECT-image
+#   container run -d --rm --init --ssh -m 8G --dns 1.1.1.1 --dns 8.8.8.8 -e GH_TOKEN=$(gh auth token) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --mount type=volume,source=$PROJECT-claude,target=/claude-config --name $PROJECT-container $PROJECT-image
+#
+# もしくは
+#
+#   container run -d --rm --init --ssh -m 8G --dns 1.1.1.1 --dns 8.8.8.8 -e GH_TOKEN=$(security find-generic-password -a "$USER" -s YOUR-FINE-GRAINED-PAT -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --mount type=volume,source=$PROJECT-claude,target=/claude-config --name $PROJECT-container $PROJECT-image
 #
 # コンテナにログインする。
 #
