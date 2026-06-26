@@ -79,8 +79,7 @@
 #
 # （初回のみ）マウントしたボリューム（コマンド履歴・Claude 設定）の所有者を変更します：
 #
-#   sudo chown -R $(id -u):$(id -g) /zsh-volume
-#   sudo chown -R $(id -u):$(id -g) /claude-config
+#   sudo chown -R $(id -u):$(id -g) /zsh-volume /claude-config
 #
 
 # Debian 12.13
@@ -98,9 +97,9 @@ ARG features_commit="a8f0b45732c6b170aa48d9276c01da13be9d6e71"
 # https://github.com/uraitakahito/extra-utils/releases/tag/1.3.0
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
 ARG extra_utils_commit="f975dbcb18f44b518cc181cedad57fd790d9894a"
-# https://github.com/uraitakahito/dotfiles/releases/tag/1.1.12
+# https://github.com/uraitakahito/dotfiles/releases/tag/1.1.13
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
-ARG dotfiles_commit="c945f655428b97788b6b5c0071f425e0167cc05e"
+ARG dotfiles_commit="48494bb371b4ffcba85156210a65742e1d8e30ee"
 # Node.js のバージョンは次の URL を参照：
 #   https://nodejs.org/en/about/previous-releases
 ARG node_version="24.14.1"
