@@ -2,7 +2,7 @@
 set -eo pipefail
 shopt -s nullglob
 
-# check to see if this file is being run or sourced from another script
+# このファイルが直接実行されたのか、別スクリプトから source されたのかを確認する
 _is_sourced() {
 	# https://unix.stackexchange.com/a/215279
 	[ "${#FUNCNAME[@]}" -ge 2 ] \
@@ -10,25 +10,25 @@ _is_sourced() {
 		&& [ "${FUNCNAME[1]}" = 'source' ]
 }
 
-# Make a runtime-mounted volume writable by the dev user.
-# Freshly created named volumes come up root-owned; chown after the mount.
-# No-op if the path is absent (not mounted). Never fatal (we run under set -e).
+# 実行時にマウントされたボリュームを開発ユーザーが書き込めるようにする。
+# 新規作成された named volume は root 所有で現れるので、マウント後に chown する。
+# パスが無ければ（未マウントなら）何もしない。set -e 下でも致命的にしない。
 _own_mount() {
 	local d="$1"
 	[ -n "$d" ] && [ -d "$d" ] || return 0
 	sudo -n chown -R "$(id -u):$(id -g)" "$d" 2>/dev/null || true
 }
 
-# Re-seed Claude Code config after the volume is mounted.
+# ボリュームのマウント後に Claude Code の設定を貼り直す。
 #
-# This image mounts a named volume over $CLAUDE_CONFIG_DIR (=/claude-config)
-# at runtime (so `claude --resume` survives `--rm`). That mount shadows the
-# symlinks dotfiles' install.sh created at build time, leaving the custom
-# statusLine / hooks hidden. The entrypoint runs *after* the mount, so
-# re-creating the symlinks here makes them stick.
+# このイメージは実行時に named volume を $CLAUDE_CONFIG_DIR (=/claude-config) へ
+# 上書きマウントする（これで `claude --resume` が `--rm` でも生き残る）。その
+# マウントは dotfiles の install.sh がビルド時に張った symlink を覆い隠し、独自の
+# statusLine / hooks を見えなくする。entrypoint はマウントの *後* に走るので、
+# ここで symlink を貼り直せば有効なまま残る。
 #
-# No-op when CLAUDE_CONFIG_DIR is unset (e.g. the plain Docker image). Never
-# fatal: a failure here must not take down the container (we run under set -e).
+# CLAUDE_CONFIG_DIR が未設定なら（例：素の Docker イメージ）何もしない。ここでの
+# 失敗でコンテナを落としてはならないので、致命的にしない（set -e 下で動作）。
 _seed_claude_config() {
 	[ -n "${CLAUDE_CONFIG_DIR:-}" ] || return 0
 	local seeder="$HOME/dotfiles/config/claude-code/seed-config-dir.sh"
@@ -43,7 +43,7 @@ _main() {
     exec "$@"
 }
 
-# If we are sourced from elsewhere, don't perform any further actions
+# 別スクリプトから source された場合は、これ以上何もしない
 if ! _is_sourced; then
 	_main "$@"
 fi
