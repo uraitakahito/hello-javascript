@@ -77,9 +77,10 @@
 # 2. **Dev Containers: Attach to Running Apple Container** を選択する
 # 3. `/app` ディレクトリを開く
 #
-# （初回のみ）マウントしたボリューム（コマンド履歴・Claude 設定）の所有者を変更します：
+# （初回のみ）マウントした zsh 履歴ボリュームの所有者を変更します
+#   （/claude-config は docker-entrypoint.sh が起動時に自動 chown します）：
 #
-#   sudo chown -R $(id -u):$(id -g) /zsh-volume /claude-config
+#   sudo chown -R $(id -u):$(id -g) /zsh-volume
 #
 # コンテナ内のドキュメントを Nginx 越しに閲覧する（extra-utils の ADDNGINX で導入済み）：
 #
@@ -202,17 +203,11 @@ RUN INSTALLYARNUSINGAPT=false \
 COPY docker-entrypoint.sh /usr/local/bin/
 
 #
-# zshの履歴の保存先。
-#   ボリュームをマウントすると意味はないが、マウント失敗時の保険をかけておく。
+# Claude Code のセッション・設定の保存先。
+#   起動時に同名ボリュームをマウントすると `claude --resume` が使える。
+#   マウントポイントはランタイムが自動生成し、所有者は docker-entrypoint.sh が
+#   起動時に developer へ chown する（ビルド時の mkdir/chown は不要）。
 #
-RUN mkdir -p /zsh-volume && chown ${user_id}:${group_id} /zsh-volume
-
-#
-# Claude Code のセッション・設定の保存先
-#   起動コマンドで同名ボリュームをここにマウントすると `claude --resume` が使えるようになる。
-#   ボリュームをマウントすると意味はないが、マウント失敗時の保険をかけておく。
-#
-RUN mkdir -p /claude-config && chown ${user_id}:${group_id} /claude-config
 ENV CLAUDE_CONFIG_DIR=/claude-config
 
 USER ${user_name}
