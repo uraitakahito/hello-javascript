@@ -84,9 +84,9 @@
 #
 # 配信ルートは /srv/docs（symlink）に固定。起動時に docs-root で配信先を選べます（既定 /app）。
 #
-#   sudo nginx                                     # 起動（既定 root = /app）
-#   sudo docs-root /app/private-note/tmp           # 配信先を切替（symlink を張替）
-#   sudo nginx -s reload  /  sudo nginx -s stop    # 再読込 / 停止
+#   sudo nginx                           # 起動（既定 root = /app）
+#   sudo docs-root /app/private-note/tmp # 配信先を切替（symlink を張替）
+#   sudo nginx -s reload.                # 再読込
 #
 # ホストからは Apple container の固有 IP で開きます：
 #
