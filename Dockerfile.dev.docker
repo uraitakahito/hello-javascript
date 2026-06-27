@@ -55,9 +55,8 @@
 # 詳細：
 #   https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container
 #
-# （初回のみ）コマンド履歴フォルダの所有者を変更します：
-#
-#   sudo chown -R $(id -u):$(id -g) /zsh-volume
+# マウントした zsh 履歴ボリュームの所有者は、docker-entrypoint.sh が
+# 起動時に自動で developer へ chown します（手動操作は不要）。
 #
 
 # Debian 12.13
