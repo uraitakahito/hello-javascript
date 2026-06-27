@@ -77,10 +77,8 @@
 # 2. **Dev Containers: Attach to Running Apple Container** を選択する
 # 3. `/app` ディレクトリを開く
 #
-# （初回のみ）マウントした zsh 履歴ボリュームの所有者を変更します
-#   （/claude-config は docker-entrypoint.sh が起動時に自動 chown します）：
-#
-#   sudo chown -R $(id -u):$(id -g) /zsh-volume
+# マウントしたボリューム（zsh 履歴 / Claude 設定）の所有者は、
+# docker-entrypoint.sh が起動時に自動で developer へ chown します（手動操作は不要）。
 #
 # コンテナ内のドキュメントを Nginx 越しに閲覧する（extra-utils の ADDNGINX で導入済み）：
 #
