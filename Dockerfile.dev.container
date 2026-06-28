@@ -106,9 +106,9 @@ ARG dev_user_commit="894e51b5cf42983af6c9e393ce93e163c365c9fe"
 # 本家の devcontainers/features
 ARG features_repository="https://github.com/devcontainers/features.git"
 ARG features_commit="a8f0b45732c6b170aa48d9276c01da13be9d6e71"
-# https://github.com/uraitakahito/extra-utils/releases/tag/1.6.0
+# https://github.com/uraitakahito/extra-utils/releases/tag/1.7.0
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
-ARG extra_utils_commit="1c6016daf3b28a89014401124d2aa5178a5df5e8"
+ARG extra_utils_commit="8606c1afe5b8f3cd37c555b49aad82a7a726a4a1"
 # https://github.com/uraitakahito/dotfiles/releases/tag/1.1.15
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG dotfiles_commit="b27d9d287769bf919eaf5a07b34e9b67bfa7b504"
@@ -175,6 +175,7 @@ RUN cd /usr/src && \
     git clone ${extra_utils_repository} && \
     cd extra-utils && \
     git checkout ${extra_utils_commit} && \
+    ADDAWSCLI=true \
     ADDEZA=true \
     ADDGRPCURL=true \
     ADDHADOLINT=true \
