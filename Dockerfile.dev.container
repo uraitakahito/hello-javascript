@@ -93,6 +93,19 @@
 #   container ls                                   # ADDRESS を確認（例 192.168.64.3）
 #   open http://<ADDRESS>:8080/
 #
+# コンテナ内で AI に画像編集させる（extra-utils の ADDIMAGEMAGICK で導入済み）：
+#
+# ImageMagick（convert / identify）でリサイズ・切抜・注釈・形式変換ができます。
+# 文字を描くときは -font を明示します（軽量ベースには既定フォントが無く、英数字でも必要）。
+# 同梱の日本語フォント（IPAex ゴシック）は日本語・英数字の両方をカバーします：
+#
+#   JPFONT=/usr/share/fonts/opentype/ipaexfont-gothic/ipaexg.ttf
+#   convert -size 640x360 xc:'#1e3a5f' -font "$JPFONT" -gravity center \
+#           -pointsize 44 -fill white -annotate 0 '編集済み' /app/out.png
+#   convert /app/out.png -resize 50% /app/out.webp   # 形式変換（WebP/JPEG など）
+#
+# 出力を /app に置けば、上の Nginx（:8080）越しにホストのブラウザから閲覧できます。
+#
 
 # Debian 12.13
 FROM docker.io/library/debian:bookworm-20260610
@@ -106,9 +119,9 @@ ARG dev_user_commit="894e51b5cf42983af6c9e393ce93e163c365c9fe"
 # 本家の devcontainers/features
 ARG features_repository="https://github.com/devcontainers/features.git"
 ARG features_commit="a8f0b45732c6b170aa48d9276c01da13be9d6e71"
-# https://github.com/uraitakahito/extra-utils/releases/tag/1.7.0
+# https://github.com/uraitakahito/extra-utils/releases/tag/1.8.0
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
-ARG extra_utils_commit="8606c1afe5b8f3cd37c555b49aad82a7a726a4a1"
+ARG extra_utils_commit="962275980072819ec45c972989844de929348778"
 # https://github.com/uraitakahito/dotfiles/releases/tag/1.1.15
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG dotfiles_commit="b27d9d287769bf919eaf5a07b34e9b67bfa7b504"
@@ -179,6 +192,7 @@ RUN cd /usr/src && \
     ADDEZA=true \
     ADDGRPCURL=true \
     ADDHADOLINT=true \
+    ADDIMAGEMAGICK=true \
     ADDNGINX=true \
     \
     ADDCLAUDECODE=true \
