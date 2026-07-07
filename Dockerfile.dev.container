@@ -58,12 +58,14 @@
 #   拡張ホスト（拡張機能を動かす Node プロセス）が OOM で繰り返し落ちます。
 #   --mount の /claude-config は Claude Code のセッション保存先（ENV CLAUDE_CONFIG_DIR）を
 #   永続化し、コンテナを --rm で破棄しても claude --resume を使えるようにします。
+#   -p 127.0.0.1:8080:8080 はコンテナ内 nginx(:8080) を host の localhost:8080 へ公開し、
+#   コンテナ内と host でドキュメントの URL を一致させます（詳細は下の Nginx 節）。
 #
-#   container run -d --rm --init --ssh -m 8G --dns 1.1.1.1 --dns 8.8.8.8 -e GH_TOKEN=$(gh auth token) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --mount type=volume,source=$PROJECT-claude,target=/claude-config --name $PROJECT-container $PROJECT-image
+#   container run -d --rm --init --ssh -m 8G --dns 1.1.1.1 --dns 8.8.8.8 -p 127.0.0.1:8080:8080 -e GH_TOKEN=$(gh auth token) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --mount type=volume,source=$PROJECT-claude,target=/claude-config --name $PROJECT-container $PROJECT-image
 #
 # もしくは
 #
-#   container run -d --rm --init --ssh -m 8G --dns 1.1.1.1 --dns 8.8.8.8 -e GH_TOKEN=$(security find-generic-password -a "$USER" -s YOUR-FINE-GRAINED-PAT -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --mount type=volume,source=$PROJECT-claude,target=/claude-config --name $PROJECT-container $PROJECT-image
+#   container run -d --rm --init --ssh -m 8G --dns 1.1.1.1 --dns 8.8.8.8 -p 127.0.0.1:8080:8080 -e GH_TOKEN=$(security find-generic-password -a "$USER" -s YOUR-FINE-GRAINED-PAT -w) -e TERM=$TERM --volume `pwd`:/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --mount type=volume,source=$PROJECT-claude,target=/claude-config --name $PROJECT-container $PROJECT-image
 #
 # コンテナにログインする。
 #
@@ -88,10 +90,13 @@
 #   sudo docs-root /app/private-note/tmp # 配信先を切替（symlink を張替）
 #   sudo nginx -s reload.                # 再読込
 #
-# ホストからは Apple container の固有 IP で開きます：
+# ホストからは公開ポート経由の固定 URL で開きます（IP 探し不要・毎回同じ）：
 #
-#   container ls                                   # ADDRESS を確認（例 192.168.64.3）
-#   open http://<ADDRESS>:8080/
+#   open http://localhost:8080/                          # 配信ルート直下（autoindex）
+#   open http://localhost:8080/private-note/tmp/foo.html # 個別ファイル（docroot からの相対）
+#
+# host の 8080 が他プロセスで使用中なら、run 側を -p 127.0.0.1:8899:8080 に変え、
+# 閲覧は http://localhost:8899/ にします（コンテナ側 8080 は変えない）。
 #
 # コンテナ内で AI に画像編集させる（extra-utils の ADDIMAGEMAGICK で導入済み）：
 #
@@ -104,7 +109,7 @@
 #           -pointsize 44 -fill white -annotate 0 '編集済み' /app/out.png
 #   convert /app/out.png -resize 50% /app/out.webp   # 形式変換（WebP/JPEG など）
 #
-# 出力を /app に置けば、上の Nginx（:8080）越しにホストのブラウザから閲覧できます。
+# 出力を /app に置けば、上の Nginx 越しに http://localhost:8080/ でホストのブラウザから閲覧できます。
 #
 
 # Debian 12.13
