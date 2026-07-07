@@ -124,9 +124,9 @@ ARG dev_user_commit="894e51b5cf42983af6c9e393ce93e163c365c9fe"
 # 本家の devcontainers/features
 ARG features_repository="https://github.com/devcontainers/features.git"
 ARG features_commit="a8f0b45732c6b170aa48d9276c01da13be9d6e71"
-# https://github.com/uraitakahito/extra-utils/releases/tag/1.8.0
+# https://github.com/uraitakahito/extra-utils/releases/tag/1.9.0
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
-ARG extra_utils_commit="962275980072819ec45c972989844de929348778"
+ARG extra_utils_commit="2706b43b67604fc8ccdb263ab6ff242ee66694b6"
 # https://github.com/uraitakahito/dotfiles/releases/tag/1.1.15
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG dotfiles_commit="b27d9d287769bf919eaf5a07b34e9b67bfa7b504"
@@ -199,6 +199,7 @@ RUN cd /usr/src && \
     ADDHADOLINT=true \
     ADDIMAGEMAGICK=true \
     ADDNGINX=true \
+    ADDUV=true \
     \
     ADDCLAUDECODE=true \
     # Claude Code は $HOME 配下にインストールされるため、ユーザー名の指定が必要。
