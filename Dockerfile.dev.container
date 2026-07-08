@@ -127,9 +127,9 @@ ARG features_commit="a8f0b45732c6b170aa48d9276c01da13be9d6e71"
 # https://github.com/uraitakahito/extra-utils/releases/tag/1.9.0
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
 ARG extra_utils_commit="2706b43b67604fc8ccdb263ab6ff242ee66694b6"
-# https://github.com/uraitakahito/dotfiles/releases/tag/1.1.15
+# https://github.com/uraitakahito/dotfiles/releases/tag/1.1.16
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
-ARG dotfiles_commit="b27d9d287769bf919eaf5a07b34e9b67bfa7b504"
+ARG dotfiles_commit="ef3c8ad5661ff184a63caca2172f2dc5e9ecd0e4"
 # Node.js のバージョンは次の URL を参照：
 #   https://nodejs.org/en/about/previous-releases
 ARG node_version="24.14.1"
