@@ -17,7 +17,7 @@
 #   --dns で DNS サーバーを明示します（1.1.1.1=Cloudflare / 8.8.8.8=Google）。
 #   既定では名前解決ができず apt-get / git clone / Node ダウンロードが失敗する環境向けの保険です。
 #
-#   PROJECT=$(basename `pwd` | tr '[:upper:]' '[:lower:]') && container build -f Dockerfile.dev.container -t $PROJECT-image . --dns 1.1.1.1 --dns 8.8.8.8 --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+#   PROJECT=$(basename `pwd` | tr '[:upper:]' '[:lower:]') && container build -f Dockerfile.dev.container -t $PROJECT-image . --dns 1.1.1.1 --dns 8.8.8.8 --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g` --build-arg ssh_pubkey="$(cat ~/.ssh/id_ed25519.pub)"
 #
 # （初回のみ）コマンド履歴用のボリュームを作成します：
 #
@@ -112,12 +112,28 @@
 # 出力を /app に置けば、上の Nginx 越しに http://localhost:8080/ でホストのブラウザから閲覧できます。
 #
 
+# OpenSSH でポート転送（-p 無し・起動中コンテナに後から・再起動不要）：
+#
+#   コンテナ内の 127.0.0.1:3000 を、ホストの localhost:3000 として使う例。
+#   （ビルド時に --build-arg ssh_pubkey="$(cat ~/.ssh/id_ed25519.pub)" で公開鍵を焼くこと）
+#
+#   PROJECT=$(basename `pwd` | tr '[:upper:]' '[:lower:]')
+#   ssh -f -N -L 3000:localhost:3000 \
+#       -o ProxyCommand="container exec -u 0 -i %h sh -c 'mkdir -p /run/sshd; exec /usr/sbin/sshd -i'" \
+#       -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+#       developer@$PROJECT-container
+#
+#   → 別ターミナルで:  curl http://localhost:3000
+#
+
 # Debian 12.13
 FROM docker.io/library/debian:bookworm-20260610
 
 ARG user_name=developer
 ARG user_id
 ARG group_id
+# OpenSSH ポート転送（ssh -L を container exec 越しに張る）用：あなたの公開鍵をビルド時に渡す。
+ARG ssh_pubkey=""
 # https://github.com/uraitakahito/dev-user/releases/tag/1.0.0
 ARG dev_user_repository="https://github.com/uraitakahito/dev-user.git"
 ARG dev_user_commit="894e51b5cf42983af6c9e393ce93e163c365c9fe"
@@ -185,6 +201,27 @@ RUN USERNAME=${user_name} \
     CONFIGUREZSHASDEFAULTSHELL=true \
     UPGRADEPACKAGES=false \
         /usr/src/features/src/common-utils/install.sh
+
+#
+# OpenSSH server —「ssh -L を container exec 越しに張る」トンネルの土台（-p 不要）。
+#   常駐 sshd は立てず、sshd -i（inetd モード）を exec 経由で使う。ここでは sshd 本体＋
+#   ホスト鍵＋公開鍵認証の下ごしらえだけ行う。version は openssh-client と同じにピン。
+#   UsePAM は Debian 既定の yes のまま（明示設定しない）。no にすると、パスワード無しの
+#   dev ユーザでは publickey ログインが拒否される（実機検証済み）。
+#
+RUN apt-get update -qq && \
+    apt-get install -y -qq --no-install-recommends \
+        openssh-server=1:9.2p1-2+deb12u10 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    ssh-keygen -A && \
+    mkdir -p /run/sshd && \
+    printf 'PubkeyAuthentication yes\nPasswordAuthentication no\nKbdInteractiveAuthentication no\n' \
+        > /etc/ssh/sshd_config.d/00-devtunnel.conf && \
+    install -d -m 700 -o ${user_name} -g ${group_id} /home/${user_name}/.ssh && \
+    printf '%s\n' "${ssh_pubkey}" > /home/${user_name}/.ssh/authorized_keys && \
+    chown ${user_name}:${group_id} /home/${user_name}/.ssh/authorized_keys && \
+    chmod 600 /home/${user_name}/.ssh/authorized_keys
 
 #
 # extra utils をインストールします。
