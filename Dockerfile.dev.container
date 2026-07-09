@@ -1,12 +1,11 @@
 # この Dockerfile の特徴
 #
-# - Apple の container(https://github.com/apple/container) 用の開発コンテナです（Docker/OrbStack 版は Dockerfile.dev.docker）
+# - Apple の container(https://github.com/apple/container) 用のDockerfileです（Docker/OrbStack 版は Dockerfile.dev.docker）
 # - Dev Containers の devcontainer.json 運用は対象外。Visual Studio Code からアタッチして使います
 #   （拡張設定 "dev.containers.experimentalAppleContainerSupport": true が必要）
 # - Claude Code をプリインストール済みです
 # - カスタマイズ可能な dotfiles と追加ユーティリティを含みます
 # - macOS 26+（Tahoe）/ Apple Silicon が前提です（container の要件）
-# - コンテナ内で GitHub を利用したい場合は fine-grained PAT を GH_TOKEN として渡すことを想定しています
 #
 # （初回のみ）container のサービスを起動します（初回はカーネル導入を尋ねられます）：
 #
