@@ -126,8 +126,8 @@
 #   → 別ターミナルで:  curl http://localhost:3000
 #
 
-# Debian 12.13
-FROM docker.io/library/debian:bookworm-20260610
+# Debian 12.14
+FROM docker.io/library/debian:bookworm-20260623
 
 ARG user_name=developer
 ARG user_id
