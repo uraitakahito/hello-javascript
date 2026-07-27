@@ -141,7 +141,7 @@ ARG features_repository="https://github.com/devcontainers/features.git"
 ARG features_commit="a8f0b45732c6b170aa48d9276c01da13be9d6e71"
 # https://github.com/uraitakahito/extra-utils/releases/tag/1.9.0
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
-ARG extra_utils_commit="2706b43b67604fc8ccdb263ab6ff242ee66694b6"
+ARG extra_utils_commit="de2552aed26d0961ccb202dd18724db846e2be4e"
 # https://github.com/uraitakahito/dotfiles/releases/tag/1.1.17
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG dotfiles_commit="b49076510e1b106597e38ae9cfc79bed6a26bd19"
@@ -236,6 +236,10 @@ RUN cd /usr/src && \
     ADDIMAGEMAGICK=true \
     ADDNGINX=true \
     ADDUV=true \
+    # graphify は uv 経由で入るため ADDUV=true が前提です。
+    # スキル登録(graphify install)はイメージに含まれないので、
+    # コンテナ内で 1 度実行してください。
+    ADDGRAPHIFY=true \
     \
     ADDCLAUDECODE=true \
     # Claude Code は $HOME 配下にインストールされるため、ユーザー名の指定が必要。
