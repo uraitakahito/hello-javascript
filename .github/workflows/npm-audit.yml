@@ -1,0 +1,35 @@
+# Detects known vulnerabilities (GitHub Advisory Database) in the dependency tree.
+# npm audit reads only package-lock.json, so no `npm ci` is needed and no
+# install scripts run in this job.
+
+name: npm-audit
+
+on:
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Every Monday 00:00 UTC (09:00 JST). Advisories are published regardless of
+    # code changes, so PR-triggered runs alone leave gaps.
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: npm audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        # v6.0.2 - https://github.com/actions/checkout/releases/tag/v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: Setup Node.js
+        # v7.1.0 - https://github.com/actions/setup-node/releases/tag/v7.1.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+
+      - name: Run npm audit
+        run: npm audit
