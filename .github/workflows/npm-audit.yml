@@ -33,3 +33,14 @@ jobs:
 
       - name: Run npm audit
         run: npm audit
+
+      - name: Explain how to fix
+        if: failure()
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'MD'
+          ## How to fix
+          Fix on `develop`, then ship it with the usual develop -> main release PR.
+          1. `npm audit fix` when the patched version is inside the current semver range.
+          2. Otherwise upgrade the parent package that pulls in the vulnerable one (major upgrades are fine).
+          3. As a last resort, force it with `overrides` and record the removal condition as a FIXME in a `"//overrides"` key.
+          MD
