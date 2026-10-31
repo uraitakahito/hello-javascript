@@ -6,7 +6,7 @@ name: npm-audit
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [main]
   schedule:
     # Every Monday 00:00 UTC (09:00 JST). Advisories are published regardless of
     # code changes, so PR-triggered runs alone leave gaps.
@@ -39,7 +39,7 @@ jobs:
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<'MD'
           ## How to fix
-          Fix on `develop`, then ship it with the usual develop -> main release PR.
+          Fix it on a short-lived branch and merge it into `main` with a pull request.
           1. `npm audit fix` when the patched version is inside the current semver range.
           2. Otherwise upgrade the parent package that pulls in the vulnerable one (major upgrades are fine).
           3. As a last resort, force it with `overrides` and record the removal condition as a FIXME in a `"//overrides"` key.
