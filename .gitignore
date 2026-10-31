@@ -9,3 +9,6 @@ node_modules
 .vscode/settings.json
 .vscode/tasks.json
 
+# Claude Code: 作業メモ（tasks/lessons.md など）
+tasks
+
